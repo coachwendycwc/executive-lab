@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery Ritual Planner | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A; --accent: #2A7B8C; --accent-warm: #D4A574;
+            --text: #333333; --text-light: #666666; --text-muted: #999999;
+            --bg: #FAF8F5; --bg-warm: #F5F2ED; --border: #E5E0D8; --success: #4A9B7F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+        .logo { height: 80px; margin-bottom: 24px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; display: block; }
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .subtitle { font-size: 18px; color: var(--text-light); max-width: 660px; margin: 0 auto; }
+        .workbook-tag { font-size: 12px; color: var(--text-muted); margin-top: 14px; font-style: italic; }
+        .instructions { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 20px 24px; margin-bottom: 40px; border-radius: 0 4px 4px 0; }
+        .instructions h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .instructions p { font-size: 14px; color: var(--text-light); margin: 0; }
+        .section { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-bottom: 24px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+        .step-number { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+        .section-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600; color: var(--primary); }
+        .section-tier { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .section-description { font-size: 14px; color: var(--text-light); margin-bottom: 24px; padding-left: 56px; }
+        label { display: block; font-size: 14px; font-weight: 500; color: var(--primary); margin-bottom: 8px; }
+        textarea, input[type="text"], input[type="date"] { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 15px; color: var(--text); background: var(--bg); transition: border-color 0.2s, box-shadow 0.2s; resize: vertical; }
+        textarea:focus, input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(42, 123, 140, 0.1); }
+        textarea { min-height: 80px; }
+        .field-group { margin-bottom: 20px; }
+        .field-group:last-child { margin-bottom: 0; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+        .data-table th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table td { padding: 0; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .data-table td input { width: 100%; padding: 12px 14px; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--text); }
+        .data-table td select { width: 100%; border: none; background: transparent; padding: 12px 14px; font-family: inherit; font-size: 14px; color: var(--text); }
+        .data-table td textarea { display: block; width: 100%; padding: 12px 14px; border: none; border-radius: 0; background: transparent; font-family: inherit; font-size: 14px; line-height: 1.45; color: var(--text); resize: none; overflow: hidden; min-height: 44px; vertical-align: top; }
+        .data-table td input:focus, .data-table td select:focus, .data-table td textarea:focus { outline: none; background: rgba(42,123,140,0.04); }
+        .data-table tr:last-child td { border-bottom: none; }
+        .tier-intro { font-size: 13.5px; color: var(--text-light); background: var(--bg); border-left: 3px solid var(--accent-warm); padding: 12px 16px; margin-bottom: 16px; border-radius: 0 4px 4px 0; }
+        .nonneg { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+        .nonneg .num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-warm); color: white; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .nonneg input { margin: 0; }
+        .save-status { font-size: 13px; color: var(--success); display: flex; align-items: center; gap: 6px; }
+        .save-status.hidden { visibility: hidden; }
+        .button-row { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .btn { padding: 12px 24px; border-radius: 4px; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background: #236a79; }
+        .btn-secondary { background: transparent; color: var(--text-light); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--text-light); }
+        footer { text-align: center; padding: 40px 24px; color: var(--text-muted); font-size: 13px; }
+        footer a { color: var(--accent); text-decoration: none; }
+        @media print { body { background: white; } .container { max-width: 100%; padding: 20px; } .button-row { display: none; } .section { border: 1px solid #ddd; break-inside: avoid; } }
+        @media screen and (max-width: 768px) { .container { padding: 24px 16px; } h1 { font-size: 28px; } .section { padding: 20px; } .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr { display: block; } .data-table thead { display: none; } .data-table tr { margin-bottom: 16px; border: 1px solid var(--border); border-radius: 4px; } .data-table td { border-bottom: 1px solid var(--border); } .data-table tr:last-child td { border-bottom: 1px solid var(--border); } }
+        @media screen and (max-width: 480px) { .container { padding: 16px 12px; } .logo { height: 60px; } h1 { font-size: 24px; } .subtitle { font-size: 15px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://coachingwomenofcolor.com/logo.webp" alt="Coaching Women of Color" class="logo">
+            <span class="module-label">Summer Integration &mdash; July / August</span>
+            <h1>Recovery Ritual Planner</h1>
+            <p class="subtitle">Rest that restores is designed, not stumbled into. Build rituals at three scales, so recovery happens on purpose, not only once you've crashed.</p>
+            <p class="workbook-tag">Part of the Energy Reset &amp; Cultural Tax Workbook &middot; 2 of 3</p>
+        </header>
+
+        <div class="instructions">
+            <h3>How to use this worksheet</h3>
+            <p>Design recovery at three scales: <strong>micro</strong> (small resets inside a day), <strong>meso</strong> (a weekly recharge), and <strong>macro</strong> (seasonal, deeper renewal). For each, name the ritual, its cue, how long it takes, and how you'll protect it. Then set the boundaries and non-negotiables that keep it real. Answers auto-save as you type.</p>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="section" id="section-1">
+            <div class="section-header"><div class="step-number">1</div><div><span class="section-tier">Micro &middot; daily</span><div class="section-title">Small Resets Inside the Day</div></div></div>
+            <div class="section-description">Two to five minutes that interrupt the depletion before it compounds: a breath between meetings, a step outside, a hand on your own shoulder.</div>
+            <div class="tier-intro">Cue = the moment that triggers it (e.g., "after every meeting," "when my jaw tightens"). Rituals with a cue happen; rituals without one get skipped.</div>
+            <table class="data-table">
+                <thead><tr><th>Ritual</th><th>Cue / when</th><th>How long</th><th>How I'll protect it</th></tr></thead>
+                <tbody>
+                    <tr><td><textarea class="mi-ritual" placeholder="e.g., three slow breaths + shoulders down"></textarea></td><td><textarea class="mi-cue" placeholder="e.g., before opening a hard email"></textarea></td><td><input type="text" class="mi-long" placeholder="2 min"></td><td><textarea class="mi-protect" placeholder="e.g., sticky note on monitor"></textarea></td></tr>
+                    <tr><td><textarea class="mi-ritual"></textarea></td><td><textarea class="mi-cue"></textarea></td><td><input type="text" class="mi-long"></td><td><textarea class="mi-protect"></textarea></td></tr>
+                    <tr><td><textarea class="mi-ritual"></textarea></td><td><textarea class="mi-cue"></textarea></td><td><input type="text" class="mi-long"></td><td><textarea class="mi-protect"></textarea></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="section" id="section-2">
+            <div class="section-header"><div class="step-number">2</div><div><span class="section-tier">Meso &middot; weekly</span><div class="section-title">Your Weekly Recharge</div></div></div>
+            <div class="section-description">A protected block each week that genuinely refills you, not errands, not catch-up. The thing you'd defend if someone tried to book over it.</div>
+            <table class="data-table">
+                <thead><tr><th>Ritual</th><th>Day / time</th><th>How long</th><th>How I'll protect it</th></tr></thead>
+                <tbody>
+                    <tr><td><textarea class="me-ritual" placeholder="e.g., Sunday slow morning, no screens"></textarea></td><td><textarea class="me-cue" placeholder="e.g., Sunday 8&ndash;10am"></textarea></td><td><input type="text" class="me-long" placeholder="2 hrs"></td><td><textarea class="me-protect" placeholder="e.g., recurring calendar block, phone in another room"></textarea></td></tr>
+                    <tr><td><textarea class="me-ritual"></textarea></td><td><textarea class="me-cue"></textarea></td><td><input type="text" class="me-long"></td><td><textarea class="me-protect"></textarea></td></tr>
+                    <tr><td><textarea class="me-ritual"></textarea></td><td><textarea class="me-cue"></textarea></td><td><input type="text" class="me-long"></td><td><textarea class="me-protect"></textarea></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="section" id="section-3">
+            <div class="section-header"><div class="step-number">3</div><div><span class="section-tier">Macro &middot; seasonal</span><div class="section-title">Deeper, Seasonal Renewal</div></div></div>
+            <div class="section-description">The longer resets that need planning ahead: a day off just for you, time in community, a real break, a retreat, time with people who require nothing of you.</div>
+            <table class="data-table">
+                <thead><tr><th>Ritual</th><th>Roughly when</th><th>What it needs (plan ahead)</th><th>First step to make it real</th></tr></thead>
+                <tbody>
+                    <tr><td><textarea class="ma-ritual" placeholder="e.g., a solo day, no obligations"></textarea></td><td><textarea class="ma-cue" placeholder="e.g., end of each quarter"></textarea></td><td><textarea class="ma-need" placeholder="e.g., PTO request, childcare arranged"></textarea></td><td><textarea class="ma-step" placeholder="e.g., book the day off this week"></textarea></td></tr>
+                    <tr><td><textarea class="ma-ritual"></textarea></td><td><textarea class="ma-cue"></textarea></td><td><textarea class="ma-need"></textarea></td><td><textarea class="ma-step"></textarea></td></tr>
+                    <tr><td><textarea class="ma-ritual"></textarea></td><td><textarea class="ma-cue"></textarea></td><td><textarea class="ma-need"></textarea></td><td><textarea class="ma-step"></textarea></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="section" id="section-4">
+            <div class="section-header"><div class="step-number">4</div><div class="section-title">Boundaries That Protect Recovery</div></div>
+            <div class="section-description">Rituals survive only when a boundary guards them. Draft the language you'll actually use: short, warm, and without over-explaining.</div>
+            <div class="field-group"><label>To protect my time, I will stop saying yes to:</label><textarea id="bd-stop" placeholder="e.g., meetings scheduled during my lunch, work messages after 7pm"></textarea></div>
+            <div class="field-group"><label>A boundary script I can reuse (say it out loud once):</label><textarea id="bd-script" placeholder="e.g., 'I'm not available then, but I can do Thursday.' No apology, no long reason."></textarea></div>
+            <div class="field-group"><label>Who I'll tell, so the boundary is known (not just intended):</label><input type="text" id="bd-who" placeholder="e.g., my manager, my team, my family"></div>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="section" id="section-5">
+            <div class="section-header"><div class="step-number">5</div><div class="section-title">My Three Non-Negotiables</div></div>
+            <div class="section-description">If everything else falls away in a hard week, these three stay. Keep them small enough to survive a bad week.</div>
+            <div class="nonneg"><div class="num">1</div><input type="text" id="nn-1" placeholder="e.g., 7 hours of sleep, most nights"></div>
+            <div class="nonneg"><div class="num">2</div><input type="text" id="nn-2" placeholder="e.g., one real meal, sitting down"></div>
+            <div class="nonneg"><div class="num">3</div><input type="text" id="nn-3" placeholder="e.g., 10 minutes outside, alone"></div>
+            <div class="field-group" style="margin-top: 20px;"><label>My accountability, who or what will help me keep these:</label><input type="text" id="nn-accountable" placeholder="e.g., a check-in with my accountability partner, a weekly reminder"></div>
+        </div>
+
+        <div class="button-row">
+            <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+            <span class="save-status hidden" id="save-status">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Auto-saved
+            </span>
+            <button class="btn btn-primary" onclick="window.print()">Print / PDF</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Executive Leadership Lab &mdash; Summer Integration</p>
+        <p><a href="https://coachingwomenofcolor.com">Coaching Women of Color&reg;</a></p>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'cwc-recovery-ritual-planner-v1';
+        const CLASS_FIELDS = ['mi-ritual','mi-cue','mi-long','mi-protect','me-ritual','me-cue','me-long','me-protect','ma-ritual','ma-cue','ma-need','ma-step'];
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(el => { if (el.id) data[el.id] = el.value; });
+            CLASS_FIELDS.forEach(cls => { document.querySelectorAll('.' + cls).forEach((el, i) => { data[cls + '-' + i] = el.value; }); });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            const status = document.getElementById('save-status');
+            status.classList.remove('hidden');
+            setTimeout(() => status.classList.add('hidden'), 2000);
+        }
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+            const data = JSON.parse(saved);
+            Object.keys(data).forEach(key => { const el = document.getElementById(key); if (el) el.value = data[key]; });
+            CLASS_FIELDS.forEach(cls => { document.querySelectorAll('.' + cls).forEach((el, i) => { if (data[cls + '-' + i] !== undefined) el.value = data[cls + '-' + i]; }); });
+        }
+        function clearAll() {
+            if (!confirm('Clear all saved data? This cannot be undone.')) return;
+            localStorage.removeItem(STORAGE_KEY);
+            document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(el => el.value = '');
+            document.querySelectorAll('select').forEach(el => el.value = '');
+        }
+        document.addEventListener('input', saveData);
+        document.addEventListener('change', saveData);
+        loadData();
+        function autoGrowCell(el){
+            el.style.height = 'auto';
+            var h = el.scrollHeight;
+            if (!el.value && el.placeholder) { el.value = el.placeholder; el.style.height = 'auto'; h = Math.max(h, el.scrollHeight); el.value = ''; el.style.height = 'auto'; }
+            el.style.height = h + 'px';
+        }
+        var cellAreas = document.querySelectorAll('.data-table td textarea');
+        cellAreas.forEach(function(t){ t.addEventListener('input', function(){ autoGrowCell(t); }); autoGrowCell(t); });
+        window.addEventListener('resize', function(){ cellAreas.forEach(autoGrowCell); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wins-to-Stories Converter | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A; --accent: #2A7B8C; --accent-warm: #D4A574;
+            --text: #333333; --text-light: #666666; --text-muted: #999999;
+            --bg: #FAF8F5; --bg-warm: #F5F2ED; --border: #E5E0D8; --success: #4A9B7F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+        .logo { height: 80px; margin-bottom: 24px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; display: block; }
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .subtitle { font-size: 18px; color: var(--text-light); max-width: 680px; margin: 0 auto; }
+        .instructions { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 20px 24px; margin-bottom: 40px; border-radius: 0 4px 4px 0; }
+        .instructions h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .instructions p { font-size: 14px; color: var(--text-light); margin: 0; }
+        .section { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-bottom: 24px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+        .step-number { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+        .section-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600; color: var(--primary); }
+        .section-description { font-size: 14px; color: var(--text-light); margin-bottom: 24px; padding-left: 56px; }
+        label { display: block; font-size: 14px; font-weight: 500; color: var(--primary); margin-bottom: 8px; }
+        textarea, input[type="text"] { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 15px; color: var(--text); background: var(--bg); transition: border-color 0.2s, box-shadow 0.2s; resize: vertical; }
+        textarea:focus, input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(42, 123, 140, 0.1); }
+        textarea { min-height: 70px; }
+        .field-group { margin-bottom: 20px; }
+        .field-group:last-child { margin-bottom: 0; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+        .data-table th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table td { padding: 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .data-table td select { width: 100%; border: none; background: transparent; padding: 12px 14px; font-family: inherit; font-size: 14px; color: var(--text); }
+        .data-table td textarea { display: block; width: 100%; padding: 12px 14px; border: none; border-radius: 0; background: transparent; font-family: inherit; font-size: 14px; line-height: 1.45; color: var(--text); resize: none; overflow: hidden; min-height: 60px; vertical-align: top; }
+        .data-table td select:focus, .data-table td textarea:focus { outline: none; background: rgba(42,123,140,0.04); }
+        .data-table tr:last-child td { border-bottom: none; }
+        .row-num { padding: 12px 8px 12px 14px; font-size: 13px; font-weight: 700; color: var(--accent); text-align: center; width: 34px; }
+        .save-status { font-size: 13px; color: var(--success); display: flex; align-items: center; gap: 6px; }
+        .save-status.hidden { visibility: hidden; }
+        .button-row { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .btn { padding: 12px 24px; border-radius: 4px; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background: #236a79; }
+        .btn-secondary { background: transparent; color: var(--text-light); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--text-light); }
+        footer { text-align: center; padding: 40px 24px; color: var(--text-muted); font-size: 13px; }
+        footer a { color: var(--accent); text-decoration: none; }
+        @media print { body { background: white; } .container { max-width: 100%; padding: 20px; } .button-row { display: none; } .section { border: 1px solid #ddd; break-inside: avoid; } }
+        @media screen and (max-width: 768px) { .container { padding: 24px 16px; } h1 { font-size: 28px; } .section { padding: 20px; } .section-description { padding-left: 0; } .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr { display: block; } .data-table thead { display: none; } .data-table tr { margin-bottom: 16px; border: 1px solid var(--border); border-radius: 4px; } .data-table td { border-bottom: 1px solid var(--border); } .data-table tr:last-child td { border-bottom: 1px solid var(--border); } .row-num { text-align: left; width: auto; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 11px; } .row-num::after { content: ' story'; } }
+        @media screen and (max-width: 480px) { .container { padding: 16px 12px; } .logo { height: 60px; } h1 { font-size: 24px; } .subtitle { font-size: 15px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://coachingwomenofcolor.com/logo.webp" alt="Coaching Women of Color" class="logo">
+            <span class="module-label">Module 9 &mdash; September</span>
+            <h1>Wins-to-Stories Converter</h1>
+            <p class="subtitle">You already have the material. Take the wins you've earned this year and turn each one into a story you can actually tell.</p>
+        </header>
+
+        <div class="instructions">
+            <h3>How to use this worksheet</h3>
+            <p>List three to five real wins. For each, break it into Challenge, Action, and Result, then tag where you'd use it. Keep the Action in the first person: this is your part of the story. Cells grow as you type, and answers auto-save.</p>
+        </div>
+
+        <div class="section" id="section-table">
+            <div class="section-header"><div class="step-number">1</div><div class="section-title">Convert Your Wins</div></div>
+            <div class="section-description">One win per row. You don't need a bigger career for great stories; you need to mine the wins you have.</div>
+            <table class="data-table">
+                <thead><tr><th>#</th><th>The win</th><th>Challenge / context</th><th>My action (first person)</th><th>Result</th><th>Where I'll use it</th></tr></thead>
+                <tbody>
+                    <tr><td class="row-num">1</td><td><textarea class="w-win" placeholder="e.g., Rescued the vendor migration"></textarea></td><td><textarea class="w-challenge" placeholder="What was hard or at risk?"></textarea></td><td><textarea class="w-action" placeholder="What I specifically did"></textarea></td><td><textarea class="w-result" placeholder="The outcome, with a number if you have one"></textarea></td><td><select class="w-where"><option value="">Select</option><option>Interview</option><option>Performance review</option><option>Leading teams</option><option>Networking</option></select></td></tr>
+                    <tr><td class="row-num">2</td><td><textarea class="w-win"></textarea></td><td><textarea class="w-challenge"></textarea></td><td><textarea class="w-action"></textarea></td><td><textarea class="w-result"></textarea></td><td><select class="w-where"><option value="">Select</option><option>Interview</option><option>Performance review</option><option>Leading teams</option><option>Networking</option></select></td></tr>
+                    <tr><td class="row-num">3</td><td><textarea class="w-win"></textarea></td><td><textarea class="w-challenge"></textarea></td><td><textarea class="w-action"></textarea></td><td><textarea class="w-result"></textarea></td><td><select class="w-where"><option value="">Select</option><option>Interview</option><option>Performance review</option><option>Leading teams</option><option>Networking</option></select></td></tr>
+                    <tr><td class="row-num">4</td><td><textarea class="w-win"></textarea></td><td><textarea class="w-challenge"></textarea></td><td><textarea class="w-action"></textarea></td><td><textarea class="w-result"></textarea></td><td><select class="w-where"><option value="">Select</option><option>Interview</option><option>Performance review</option><option>Leading teams</option><option>Networking</option></select></td></tr>
+                    <tr><td class="row-num">5</td><td><textarea class="w-win"></textarea></td><td><textarea class="w-challenge"></textarea></td><td><textarea class="w-action"></textarea></td><td><textarea class="w-result"></textarea></td><td><select class="w-where"><option value="">Select</option><option>Interview</option><option>Performance review</option><option>Leading teams</option><option>Networking</option></select></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" id="section-pick">
+            <div class="section-header"><div class="step-number">2</div><div class="section-title">Pick Your Anchor</div></div>
+            <div class="section-description">One of these is your strongest story. That's the seed of your Signature Story.</div>
+            <div class="field-group"><label>The win I'll polish into my 2-minute Signature Story, and why it's the one:</label><textarea id="pick-anchor" placeholder="Which story best captures who you are and the value you bring?"></textarea></div>
+        </div>
+
+        <div class="button-row">
+            <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+            <span class="save-status hidden" id="save-status">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Auto-saved
+            </span>
+            <button class="btn btn-primary" onclick="window.print()">Print / PDF</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Executive Leadership Lab &mdash; Module 9: Executive Storytelling</p>
+        <p><a href="https://coachingwomenofcolor.com">Coaching Women of Color&reg;</a></p>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'cwc-wins-to-stories-v1';
+        const CLASS_FIELDS = ['w-win','w-challenge','w-action','w-result','w-where'];
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('input[type="text"], textarea').forEach(el => { if (el.id) data[el.id] = el.value; });
+            CLASS_FIELDS.forEach(cls => { document.querySelectorAll('.' + cls).forEach((el, i) => { data[cls + '-' + i] = el.value; }); });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            const status = document.getElementById('save-status');
+            status.classList.remove('hidden');
+            setTimeout(() => status.classList.add('hidden'), 2000);
+        }
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+            const data = JSON.parse(saved);
+            Object.keys(data).forEach(key => { const el = document.getElementById(key); if (el) el.value = data[key]; });
+            CLASS_FIELDS.forEach(cls => { document.querySelectorAll('.' + cls).forEach((el, i) => { if (data[cls + '-' + i] !== undefined) el.value = data[cls + '-' + i]; }); });
+        }
+        function clearAll() {
+            if (!confirm('Clear all saved data? This cannot be undone.')) return;
+            localStorage.removeItem(STORAGE_KEY);
+            document.querySelectorAll('input[type="text"], textarea').forEach(el => el.value = '');
+            document.querySelectorAll('select').forEach(el => el.value = '');
+            document.querySelectorAll('.data-table td textarea').forEach(autoGrowCell);
+        }
+        function autoGrowCell(el){
+            el.style.height = 'auto';
+            var h = el.scrollHeight;
+            if (!el.value && el.placeholder) { el.value = el.placeholder; el.style.height = 'auto'; h = Math.max(h, el.scrollHeight); el.value = ''; el.style.height = 'auto'; }
+            el.style.height = h + 'px';
+        }
+        document.addEventListener('input', saveData);
+        document.addEventListener('change', saveData);
+        loadData();
+        var cellAreas = document.querySelectorAll('.data-table td textarea');
+        cellAreas.forEach(function(t){ t.addEventListener('input', function(){ autoGrowCell(t); }); autoGrowCell(t); });
+        window.addEventListener('resize', function(){ cellAreas.forEach(autoGrowCell); });
+    </script>
+</body>
+</html>

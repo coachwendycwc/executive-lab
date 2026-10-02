@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 9: Executive Storytelling - Facilitator Talking Points</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7; color: #333; background: #fff;
+            padding: 40px; max-width: 900px; margin: 0 auto;
+        }
+
+        @media print {
+            body { padding: 20px; font-size: 11pt; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+            h1 { font-size: 24pt; } h2 { font-size: 16pt; } h3 { font-size: 13pt; }
+        }
+        @media screen and (max-width: 768px) {
+            body { padding: 20px; }
+            .download-bar { padding: 12px 20px; flex-direction: column; gap: 10px; }
+            .download-bar h1 { font-size: 14px; text-align: center; }
+            .spacer { height: 100px; }
+            .header h1 { font-size: 26px; } .header p { font-size: 16px; }
+            h1 { font-size: 22px; margin: 32px 0 16px; } h2 { font-size: 18px; }
+            .script-box { padding: 16px 20px; } .script-box p { font-size: 15px; }
+            .key-points { padding: 16px; } .engagement-box { padding: 14px 16px; } .checklist { padding: 16px; }
+        }
+        @media screen and (max-width: 480px) {
+            body { padding: 12px; }
+            .download-bar { padding: 10px 12px; } .download-bar h1 { font-size: 12px; }
+            .download-btn { padding: 8px 16px; font-size: 12px; }
+            .spacer { height: 90px; }
+            .header { margin-bottom: 32px; padding-bottom: 24px; } .header h1 { font-size: 22px; } .logo { height: 50px; }
+            h1 { font-size: 20px; margin: 24px 0 12px; padding-top: 16px; } h2 { font-size: 16px; margin: 24px 0 12px; } h3 { font-size: 13px; }
+            .script-box { padding: 12px 14px; } .script-box p { font-size: 14px; line-height: 1.6; }
+            .time-badge { font-size: 11px; padding: 3px 10px; }
+        }
+
+        .download-bar { position: fixed; top: 0; left: 0; right: 0; background: #1A1A1A; color: #fff; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .download-bar h1 { font-size: 18px; font-weight: 600; }
+        .download-btn { background: #2A7B8C; color: #fff; border: none; padding: 10px 24px; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+        .download-btn:hover { background: #236573; }
+        .spacer { height: 80px; }
+
+        .header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 3px solid #1A1A1A; }
+        .logo { height: 60px; margin-bottom: 24px; }
+        .header h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; color: #1A1A1A; margin-bottom: 8px; }
+        .header p { font-size: 18px; color: #666; }
+
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; color: #1A1A1A; margin: 40px 0 8px; }
+        h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #2A7B8C; margin: 20px 0 8px; }
+
+        .time-badge { display: inline-block; background: #2A7B8C; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+
+        .script-box { background: #FAF8F5; border-left: 4px solid #D4A574; padding: 24px 28px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+        .script-box p { margin-bottom: 16px; line-height: 1.8; }
+        .script-box p:last-child { margin-bottom: 0; }
+
+        .key-points { background: #f5f5f5; padding: 20px 24px; margin: 16px 0; border-radius: 8px; }
+        .key-points ul { margin-left: 20px; }
+        .key-points li { margin-bottom: 8px; }
+
+        .example-box { background: #EEF6F1; border: 1px solid #4A9B7F; padding: 16px 20px; margin: 16px 0; border-radius: 6px; font-size: 15px; }
+        .example-box strong { color: #2E7D57; }
+        .example-box .ex-label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #2E7D57; margin-bottom: 8px; }
+
+        .engagement-box { background: #E8F4F6; border: 1px solid #2A7B8C; padding: 16px 20px; margin: 16px 0; border-radius: 6px; }
+        .engagement-box strong { color: #2A7B8C; }
+
+        .woc-note { background: #F3E5F5; border-left: 4px solid #9C27B0; padding: 16px 20px; margin: 16px 0; font-size: 14px; border-radius: 0 6px 6px 0; }
+        .woc-note strong { color: #7B1FA2; }
+
+        .delivery-note { background: #FFF9F0; border-left: 4px solid #D4A574; padding: 16px 20px; margin: 16px 0; font-size: 14px; border-radius: 0 6px 6px 0; }
+        .delivery-note strong { color: #B8893F; }
+
+        .checklist { background: #FFF9F5; border: 1px solid #D4A574; padding: 20px 24px; margin: 16px 0; border-radius: 8px; }
+        .checklist ul { list-style: none; margin: 0; }
+        .checklist li { padding: 8px 0; padding-left: 28px; position: relative; border-bottom: 1px solid #F0EBE5; }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before { content: '\2610'; position: absolute; left: 0; color: #D4A574; font-size: 18px; }
+
+        .footer { margin-top: 60px; padding-top: 32px; border-top: 2px solid #E5E0D8; text-align: center; font-size: 13px; color: #999; }
+        .footer p { margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+    <div class="download-bar no-print">
+        <h1>Module 9 Talking Points - Detailed Script</h1>
+        <button class="download-btn" onclick="window.print()">Download / Print PDF</button>
+    </div>
+
+    <div class="spacer no-print"></div>
+
+    <div class="header">
+        <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+        <h1>Module 9: Executive Storytelling</h1>
+        <p>Master Your Narrative</p>
+        <p style="font-size: 14px; margin-top: 12px; color: #999;">Detailed Script for Recorded Module &middot; 22-Slide Deck &middot; Lane: Value</p>
+    </div>
+
+    <h1>Pre-Recording Checklist</h1>
+    <div class="checklist">
+        <ul>
+            <li>Screen share tested with the slide deck open and full-screen</li>
+            <li>All four worksheets uploaded to the platform:
+                <ul style="margin-top: 8px; margin-left: 20px; list-style: disc;">
+                    <li>Story Structure Templates (STAR, CAR, CARL)</li>
+                    <li>Wins-to-Stories Converter</li>
+                    <li>Signature Story Worksheet</li>
+                    <li>Delivery Self-Assessment Checklist</li>
+                </ul>
+            </li>
+            <li>Your own Signature Story ready to tell live, so you can model it in real time</li>
+            <li>Quiet recording environment with good lighting</li>
+            <li>Water and notes within reach</li>
+            <li>Timer ready for the four activity sections (to guide pacing)</li>
+        </ul>
+    </div>
+
+    <!-- ==================== SLIDE 1 ==================== -->
+    <h1>Slide 1: Executive Storytelling, Master Your Narrative</h1>
+    <div class="time-badge">2&ndash;3 minutes</div>
+    <h3>Opening Script</h3>
+    <div class="script-box">
+        <p>&ldquo;Welcome back to the Executive Leadership Lab. This is Module 9, and after the summer, we are shifting gears. This month is about a skill that quietly decides who gets remembered, promoted, and chosen: telling the story of your own work.&rdquo;</p>
+        <p>&ldquo;I want to start with the line on the screen, because it is the whole premise: your work does not speak for itself. The story you tell about it is what travels into the rooms where you are discussed. You can run the best project of the year, but if the only place it lives is one buried bullet on a self-review no one reads closely, it may as well not have happened.&rdquo;</p>
+        <p>&ldquo;So this month, we build the telling.&rdquo;</p>
+    </div>
+    <div class="delivery-note"><strong>Delivery note:</strong> Warm open, no data. Set the tone that this is craft and technique, not self-promotion. If you have a Signature Story ready, mention that you will tell yours live later so they know the destination.</div>
+
+    <!-- ==================== SLIDE 2 ==================== -->
+    <h1>Slide 2: A Win No One Hears About Doesn't Travel</h1>
+    <div class="time-badge">4&ndash;5 minutes</div>
+    <h3>Framing Why This Matters</h3>
+    <div class="script-box">
+        <p>&ldquo;Here is why this is not optional. The version of your work that reaches a promotion committee, an interviewer, or your own team is not the work itself. It is the version you can put into words. If you cannot narrate it, they are working from someone else's summary of you, or from nothing.&rdquo;</p>
+        <p>&ldquo;Picture a calibration meeting, the one where leaders decide who is ready for the next level. You are not in the room. What is in the room is a sentence or two that someone remembers about you. The person who gave their manager a clear, ninety-second story is the one who gets described accurately. The person whose great work never got a story attached to it gets described as, quote, solid. Solid does not get promoted.&rdquo;</p>
+        <p>&ldquo;Coming off the summer, you have had space to reflect on what you have done. This month we turn that reflection into narrative, the technique of telling your wins so they land and stay.&rdquo;</p>
+    </div>
+    <div class="delivery-note"><strong>Delivery note:</strong> Keep this structural, not shaming. The problem is not that participants brag too little; it is that good work without a story quietly disappears. Name that plainly.</div>
+
+    <!-- ==================== SLIDE 3 ==================== -->
+    <h1>Slide 3: What You'll Gain</h1>
+    <div class="time-badge">3 minutes</div>
+    <h3>Walking the Four Outcomes</h3>
+    <div class="script-box">
+        <p>&ldquo;Four things this month, and each one is tied to a worksheet you will actually fill in.&rdquo;</p>
+        <p>&ldquo;<strong>One: three story structures.</strong> STAR, CAR, and CARL. Simple frames that turn a messy win into a story people remember. Think of them as containers you pour a win into.&rdquo;</p>
+        <p>&ldquo;<strong>Two: a wins-to-stories habit.</strong> You already have the accomplishments; you will practice converting them into stories on demand, so you are never caught flat-footed when someone says, so what have you been working on.&rdquo;</p>
+        <p>&ldquo;<strong>Three: a two-minute Signature Story.</strong> One story you can tell in your sleep that captures who you are and the value you bring. Your default answer to tell me about yourself.&rdquo;</p>
+        <p>&ldquo;<strong>Four: sharper delivery.</strong> Because a strong story told apologetically loses. We will work on ownership language, pacing, and presence so the story lands the way you mean it.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 4 ==================== -->
+    <h1>Slide 4: From Doing the Work to Owning the Telling</h1>
+    <div class="time-badge">4 minutes</div>
+    <h3>Teaching the Central Shift</h3>
+    <div class="script-box">
+        <p>&ldquo;Here is the mindset the whole month rests on. Doing great work is necessary. It is not sufficient. The people who advance are the ones who also learn to narrate their impact, on purpose, in their own words.&rdquo;</p>
+        <p>&ldquo;A lot of us were raised, professionally and personally, to believe that if we just keep our heads down and do excellent work, the right people will notice. Sometimes they do. Often they are busy, and they promote the story they can remember. That is not cynical; it is just how attention works.&rdquo;</p>
+        <p>&ldquo;So hear the reframe on the screen: your narrative is an asset you build, not a talent you are born with. Nobody is a born storyteller of their own career. It is a skill, and this month you build it.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 5 ==================== -->
+    <h1>Slide 5: February Chose the Rooms, September Gives You the Words</h1>
+    <div class="time-badge">4 minutes</div>
+    <h3>The Key Distinction</h3>
+    <div class="script-box">
+        <p>&ldquo;If February's module felt related, that is because it is the other half of the same skill. Let me draw the line clearly, because it is on the screen for a reason.&rdquo;</p>
+        <p>&ldquo;February was Strategic Positioning. That was strategy: who needs to hear about your work, when, and where. It decided the rooms. September is technique: how you actually say it once you are in the room.&rdquo;</p>
+        <p>&ldquo;Concretely: in February you might have decided that your VP needs to know about the analytics project you led, and that the moment is your next skip-level. That is who, when, and where. September is the ninety seconds you actually say when that skip-level arrives and she asks what you have been proud of lately. Same win. February aimed it; September gives it words.&rdquo;</p>
+    </div>
+    <div class="delivery-note"><strong>Delivery note:</strong> Some participants did not attend February. Frame this so it stands alone: strategy is who and when; technique is how. They do not need the February deck to follow.</div>
+
+    <!-- ==================== SLIDE 6 ==================== -->
+    <h1>Slide 6: People Remember Stories, Not Bullet Points</h1>
+    <div class="time-badge">4 minutes</div>
+    <h3>Why Structure Does the Work</h3>
+    <div class="script-box">
+        <p>&ldquo;Why stories, and not just a strong list of accomplishments? Because a list is forgotten by the elevator. A story, something with a stake, a move, and a result, sticks. It gets repeated. And when it gets repeated, your credibility travels into rooms you are not in.&rdquo;</p>
+        <p>&ldquo;Let me show you the difference. Here is the bullet: managed a cross-functional migration, reduced downtime thirty percent. Accurate, and instantly forgettable. Now the story: the migration everyone was avoiding had stalled for months; I pulled the three teams into one room, made the call to sequence it in phases, and we cut downtime by nearly a third. Same facts. One of them your manager can retell on Monday. That is the whole game.&rdquo;</p>
+        <p>&ldquo;Structure is what does the carrying. A frame turns scattered facts into something a listener can hold, retell, and act on. That is what we build next.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 7 ==================== -->
+    <h1>Slide 7: Reflection</h1>
+    <div class="time-badge">2 minutes</div>
+    <h3>A Beat to Let It Land</h3>
+    <div class="script-box">
+        <p>&ldquo;Let me read the words on the screen, and then give you a moment.&rdquo;</p>
+        <p>&ldquo;If you don't put your work into words, someone else will put it into theirs, and theirs may leave you out.&rdquo;</p>
+        <p>&ldquo;Pause the video if you want to. Think of one win from this year that no one has really heard the story of. Just hold it in mind. By the end of this module, that one is going to have words.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 8 ==================== -->
+    <h1>Slide 8: Three Structures, STAR, CAR, and CARL</h1>
+    <div class="time-badge">6 minutes</div>
+    <h3>Teaching the Three Frames with One Example</h3>
+    <div class="script-box">
+        <p>&ldquo;Three structures. Do not memorize definitions; feel how each one shapes the same win differently. Look at the three cards.&rdquo;</p>
+        <p>&ldquo;<strong>STAR</strong> is the full frame: Situation, Task, Action, Result. It is best when context matters, like an interview or a review where the listener needs the setup. <strong>CAR</strong> is the tight frame: Challenge, Action, Result. Best when time is short and you want the result to land fast. <strong>CARL</strong> adds a fourth beat, Learning. Best for growth conversations and for leading a team, because it ends on what you took from it.&rdquo;</p>
+        <p>&ldquo;Let me run one real win through all three so you can hear the difference.&rdquo;</p>
+    </div>
+    <div class="example-box">
+        <span class="ex-label">Worked example, one win, three frames</span>
+        <p><strong>STAR:</strong> &ldquo;Our vendor migration had stalled for two quarters and leadership was losing patience (Situation). I was asked to get it unstuck without slipping the launch date (Task). I mapped the blockers, pulled the three teams into one weekly room, and re-sequenced the work into phases (Action). We shipped two weeks early with no downtime (Result).&rdquo;</p>
+        <p><strong>CAR:</strong> &ldquo;A migration everyone had given up on was two quarters behind (Challenge). I re-sequenced it into phases and got the three teams into one room (Action). We shipped two weeks early (Result).&rdquo;</p>
+        <p><strong>CARL:</strong> &ldquo;...We shipped two weeks early (Result). What I took from it: when a project stalls, it is usually a coordination problem, not a technical one, and that is now the first thing I check (Learning).&rdquo;</p>
+    </div>
+    <div class="delivery-note"><strong>Delivery note:</strong> Tell all three out loud at a natural pace. The point lands only when they hear the same facts get shorter, faster, or more reflective depending on the frame.</div>
+
+    <!-- ==================== SLIDE 9 ==================== -->
+    <h1>Slide 9: The Signature Story</h1>
+    <div class="time-badge">4 minutes</div>
+    <h3>Naming the Anchor</h3>
+    <div class="script-box">
+        <p>&ldquo;Everything this month builds toward one thing: your Signature Story. It is a single story, about two minutes long, that captures who you are and the value you bring. It is your default answer when someone says, tell me about yourself.&rdquo;</p>
+        <p>&ldquo;Think about how often that moment comes up and how often we fumble it: the start of an interview, a skip-level meeting, a conference introduction, a new leader asking what you do. Most people answer with a job title and a nervous list. Your Signature Story replaces that with something memorable and true.&rdquo;</p>
+        <p>&ldquo;Here is the sequence for the month, so you see how the pieces fit: first we learn the structures, then we mine your wins, and then we shape the one story you can tell in your sleep, and mean.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 10 ==================== -->
+    <h1>Slide 10: Activity, Structure a Win Three Ways</h1>
+    <div class="time-badge">12&ndash;15 minutes</div>
+    <h3>Worksheet 1: Story Structure Templates (STAR, CAR, CARL)</h3>
+    <div class="script-box">
+        <p>&ldquo;Time to make this real. Open the Story Structure Templates worksheet. Pause the video and do this now; do not just watch me.&rdquo;</p>
+        <p>&ldquo;Pick one real win. Just one. Write it at the top, then run it through STAR, then CAR, then CARL, filling in each box. As you go, notice what changes: STAR makes you set the scene, CAR makes you cut, CARL makes you reflect. You are training your ear for which frame fits which room.&rdquo;</p>
+    </div>
+    <div class="engagement-box"><strong>Activity prompt:</strong> Which frame felt strongest for your win, and why? Post it in the community. You will see the same win lands differently for different people, and that is the point.</div>
+
+    <!-- ==================== SLIDE 11 ==================== -->
+    <h1>Slide 11: You Already Have the Material</h1>
+    <div class="time-badge">4 minutes</div>
+    <h3>Removing the Excuse</h3>
+    <div class="script-box">
+        <p>&ldquo;Before the next worksheet, I want to take away the most common excuse. People tell me, I do not have big enough wins to have good stories. That is almost never true. You do not need a bigger career to have great stories; you need to mine the wins you already have.&rdquo;</p>
+        <p>&ldquo;The wins from this year, and the reflection you did over the summer, are raw material sitting right there. The time you calmed a furious client. The process you quietly fixed that saved everyone an hour a week. The new teammate you got up to speed fast. Most people leave their best stories buried inside a single results bullet. Next, we dig them out.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 12 ==================== -->
+    <h1>Slide 12: Activity, Convert Your Wins into Stories</h1>
+    <div class="time-badge">12&ndash;15 minutes</div>
+    <h3>Worksheet 2: Wins-to-Stories Converter</h3>
+    <div class="script-box">
+        <p>&ldquo;Open the Wins-to-Stories Converter. List three to five real wins, one per row. For each, break it into the challenge, your action, and the result, and tag where you would use it: an interview, a review, leading a team, or networking.&rdquo;</p>
+        <p>&ldquo;One rule for the action column: keep it in the first person. Write I decided, I built, I led. The team can be in the story, but this column is your part. We will come back to why that matters when we talk about claiming credit.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 13 ==================== -->
+    <h1>Slide 13: One Win, Re-Cut for the Room</h1>
+    <div class="time-badge">5 minutes</div>
+    <h3>Building a Small Portfolio</h3>
+    <div class="script-box">
+        <p>&ldquo;You do not need a hundred stories. You need a small portfolio of strong ones you can re-cut for the room you are in. Different rooms need different versions of the same win.&rdquo;</p>
+        <p>&ldquo;Take that migration win again. In an <strong>interview</strong>, you lead with the challenge and the result that maps to what they need: I take on stalled, high-stakes projects and get them shipped. In a <strong>performance review</strong>, you foreground your specific actions and the measurable outcome: here is exactly what I did and the number it moved. When you are <strong>leading a team</strong>, you use CARL and end on the lesson: here is what that project taught me about how we work, and what I want us to carry forward.&rdquo;</p>
+        <p>&ldquo;Same facts. Three different cuts, because the audience is different.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 14 ==================== -->
+    <h1>Slide 14: The Shape of a Signature Story</h1>
+    <div class="time-badge">5 minutes</div>
+    <h3>The Five-Beat Shape, with an Example</h3>
+    <div class="script-box">
+        <p>&ldquo;Now the anchor. A Signature Story has five beats: Hook, Stakes, Your Action, Result, and Meaning. Watch the last one, because it is the beat almost everyone skips, and it is the one they remember.&rdquo;</p>
+        <p>&ldquo;Let me build one in front of you.&rdquo;</p>
+    </div>
+    <div class="example-box">
+        <span class="ex-label">Worked example, the five beats</span>
+        <p><strong>Hook:</strong> &ldquo;Six weeks before launch, the project everyone was counting on was quietly falling apart.&rdquo;</p>
+        <p><strong>Stakes:</strong> &ldquo;If it slipped, three teams missed their targets and a major client walked.&rdquo;</p>
+        <p><strong>Your Action:</strong> &ldquo;I made the call to stop adding features, got the leads into one room, and re-sequenced the work into phases.&rdquo;</p>
+        <p><strong>Result:</strong> &ldquo;We shipped on time, and the client renewed for two more years.&rdquo;</p>
+        <p><strong>Meaning:</strong> &ldquo;That is how I work: I run toward the messy problem no one else wants to own. That is the leader I am.&rdquo;</p>
+    </div>
+    <div class="delivery-note"><strong>Delivery note:</strong> Land hard on Meaning. Say the version without it, then the version with it, so they hear that the Meaning beat is what turns a nice anecdote into a statement about who they are.</div>
+
+    <!-- ==================== SLIDE 15 ==================== -->
+    <h1>Slide 15: Activity, Craft Your Signature Story</h1>
+    <div class="time-badge">12&ndash;15 minutes</div>
+    <h3>Worksheet 3: Signature Story Worksheet</h3>
+    <div class="script-box">
+        <p>&ldquo;Open the Signature Story Worksheet. Draft your own two-minute story, one beat at a time: Hook, Stakes, Your Action, Result, Meaning. Then stitch them into one piece and read it out loud, timing yourself. Aim for about two minutes.&rdquo;</p>
+        <p>&ldquo;Go for specific over impressive. A concrete detail, a real number, one honest line about what it meant to you, that beats any amount of polished, empty language. The worksheet ends with a short checklist to tighten it; use it.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 16 ==================== -->
+    <h1>Slide 16: Owning Your Narrative as a Woman of Color</h1>
+    <div class="time-badge">5 minutes</div>
+    <h3>Naming the Realities and the Moves</h3>
+    <div class="script-box">
+        <p>&ldquo;I want to speak directly to something that makes this harder for us, and then to what we do about it. Many of us were taught to deflect credit, to say we when it was really you, to make ourselves small so the room stays comfortable. Centering others can quietly erase your own role. And minimizing, it was nothing, really, gets heard not as modesty but as fact. The room believes you.&rdquo;</p>
+        <p>&ldquo;So here are the moves. First, claim your actions in the first person: I led, I decided, I built. Second, credit the team and keep your part visible; both can be true in the same sentence: my team executed brilliantly, and I was the one who set the direction. Third, state the result plainly. Owning your result authentically is not bragging; it is accuracy.&rdquo;</p>
+        <p>&ldquo;Listen for the difference. We kind of pulled it together as a team is a sentence that disappears. I led the team that turned it around, and here is the result is a sentence that stays.&rdquo;</p>
+    </div>
+    <div class="woc-note"><strong>WOC Context:</strong> Strengths-based and structural. The pull toward deflecting credit is real and often taught; the moves are within the participant's control. Keep the tone permission-giving, not critical. No statistics on this slide.</div>
+
+    <!-- ==================== SLIDE 17 ==================== -->
+    <h1>Slide 17: How You Tell It Is Half of It</h1>
+    <div class="time-badge">5 minutes</div>
+    <h3>Delivery: Language, Pacing, Presence</h3>
+    <div class="script-box">
+        <p>&ldquo;A strong story told apologetically loses. The delivery is what makes the win believable, and three things carry it.&rdquo;</p>
+        <p>&ldquo;<strong>Ownership language.</strong> I led, not we kind of. Cut the hedges that shrink your role: just, only, sort of, I was lucky. Listen to yourself and hunt those words down. <strong>Pacing and pause.</strong> Slow down at the result and let it sit for a beat before you move on; the silence is what makes it land. Most people rush the best part. <strong>Presence.</strong> Steady voice, eye contact, no scrambling to fill the quiet. Conviction is heard as much as it is seen.&rdquo;</p>
+        <p>&ldquo;A quick example of pacing. Rushed: and-we-shipped-two-weeks-early-anyway-so-yeah. Landed: We shipped. Two weeks early. Same words. One of them you believe.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 18 ==================== -->
+    <h1>Slide 18: Activity, Assess Your Delivery</h1>
+    <div class="time-badge">8&ndash;10 minutes</div>
+    <h3>Worksheet 4: Delivery Self-Assessment Checklist</h3>
+    <div class="script-box">
+        <p>&ldquo;Open the Delivery Self-Assessment Checklist. First, say your Signature Story out loud, and if you can, record it on your phone. Then score yourself on each dimension from one to five: ownership language, no minimizing, concision, structure, and the rest.&rdquo;</p>
+        <p>&ldquo;Do not aim for a perfect score; aim for honest. Your two lowest numbers are exactly where a little practice buys the most. Pick those two, and write down how and when you will practice them.&rdquo;</p>
+    </div>
+    <div class="engagement-box"><strong>Activity prompt:</strong> Recording yourself is uncomfortable and it is the single fastest way to improve. If you do only one brave thing this month, do this one.</div>
+
+    <!-- ==================== SLIDE 19 ==================== -->
+    <h1>Slide 19: The 14-Day Storytelling Sprint</h1>
+    <div class="time-badge">4 minutes</div>
+    <h3>Three Concrete Actions</h3>
+    <div class="script-box">
+        <p>&ldquo;Knowledge without reps changes nothing, so here is your sprint: three moves in the next two weeks.&rdquo;</p>
+        <p>&ldquo;<strong>One: say it out loud.</strong> Tell your Signature Story to one real person this week, a friend, a mentor, a partner. Out loud, to a human. <strong>Two: convert two more.</strong> Add two more wins to your story portfolio using the converter. <strong>Three: use one for real.</strong> Work one story into an actual review, meeting, or introduction. Live reps are the only reps that count.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 20 ==================== -->
+    <h1>Slide 20: Reflection</h1>
+    <div class="time-badge">2 minutes</div>
+    <h3>Reframing the Discomfort</h3>
+    <div class="script-box">
+        <p>&ldquo;Before we close, the words on the screen: claiming your story is not bragging. It's making sure the truth of your work is one of the things people know.&rdquo;</p>
+        <p>&ldquo;If telling your story feels uncomfortable, and for many of us it does, sit with that reframe. You are not inflating anything. You are making sure the truth is on the table, in your words, instead of leaving it to chance or to someone else's summary. The truth of your work deserves to be known. Saying it out loud is how you protect it.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 21 ==================== -->
+    <h1>Slide 21: Key Takeaways</h1>
+    <div class="time-badge">3 minutes</div>
+    <h3>What to Remember</h3>
+    <div class="script-box">
+        <p>&ldquo;Five things to carry with you. <strong>One:</strong> the story is the asset; great work still needs to be told to travel. <strong>Two:</strong> structure carries the win; STAR, CAR, CARL, pick the frame to fit the room. <strong>Three:</strong> you already have the material; convert the wins you have, do not wait for bigger ones. <strong>Four:</strong> one Signature Story, many cuts; anchor with one and re-cut it for each audience. <strong>Five:</strong> delivery makes it believable; own your actions, slow down at the result, and drop the hedges.&rdquo;</p>
+        <p>&ldquo;Each of those maps to a worksheet you now have. The work is in front of you.&rdquo;</p>
+    </div>
+
+    <!-- ==================== SLIDE 22 ==================== -->
+    <h1>Slide 22: Homework &amp; Close, Tell the Story Only You Can Tell</h1>
+    <div class="time-badge">3 minutes</div>
+    <h3>Assigning the Work and Closing</h3>
+    <div class="script-box">
+        <p>&ldquo;Your homework, four parts. Complete all four worksheets: Story Structure Templates, Wins-to-Stories, Signature Story, and the Delivery Self-Assessment. Finish your polished two-minute Signature Story, ready to tell. Build three to five context-specific stories for interviews, reviews, and leading teams. And share one story in the community, out loud if you record it, for feedback and accountability.&rdquo;</p>
+        <p>&ldquo;And here is where we are headed. A strong narrative is the foundation for leading others. Next month, in October, we turn your voice outward: using storytelling to build coalition and to lead inclusively. This month you claimed your own story. Next month you use it to move a room. Tell the story only you can tell. I will see you next time.&rdquo;</p>
+    </div>
+
+    <div class="key-points">
+        <strong>Module at a glance:</strong>
+        <ul>
+            <li>Lane: Value (Communicate Impact)</li>
+            <li>Anchor tools: Story Structure Templates (STAR, CAR, CARL) &middot; Wins-to-Stories Converter &middot; Signature Story Worksheet &middot; Delivery Self-Assessment Checklist</li>
+            <li>Participant deliverable: a polished 2-minute Signature Story, plus 3 to 5 context-specific stories for interviews, reviews, and leading teams</li>
+            <li>No statistics are used in this module; every slide is framework and teaching.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Module 9: Executive Storytelling, Master Your Narrative &middot; Executive Leadership Lab</p>
+        <p>Coaching Women of Color&reg; | coachingwomenofcolor.com | wendy@coachingwomenofcolor.com</p>
+        <p>Confidential, For Facilitator Use Only</p>
+    </div>
+</body>
+</html>

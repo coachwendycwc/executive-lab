@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural Tax Inventory | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A; --accent: #2A7B8C; --accent-warm: #D4A574;
+            --text: #333333; --text-light: #666666; --text-muted: #999999;
+            --bg: #FAF8F5; --bg-warm: #F5F2ED; --border: #E5E0D8; --success: #4A9B7F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+        .logo { height: 80px; margin-bottom: 24px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; display: block; }
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .subtitle { font-size: 18px; color: var(--text-light); max-width: 680px; margin: 0 auto; }
+        .workbook-tag { font-size: 12px; color: var(--text-muted); margin-top: 14px; font-style: italic; }
+        .instructions { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 20px 24px; margin-bottom: 24px; border-radius: 0 4px 4px 0; }
+        .instructions h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .instructions p { font-size: 14px; color: var(--text-light); margin: 0; }
+        .define { background: var(--primary); color: #EDE7DE; padding: 22px 26px; border-radius: 8px; margin-bottom: 40px; }
+        .define strong { color: var(--accent-warm); }
+        .define .term { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: white; font-weight: 600; }
+        .section { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-bottom: 24px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+        .step-number { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: white; flex-shrink: 0; }
+        .section-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600; color: var(--primary); }
+        .section-description { font-size: 14px; color: var(--text-light); margin-bottom: 24px; padding-left: 56px; }
+        label { display: block; font-size: 14px; font-weight: 500; color: var(--primary); margin-bottom: 8px; }
+        textarea, input[type="text"], input[type="date"] { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 15px; color: var(--text); background: var(--bg); transition: border-color 0.2s, box-shadow 0.2s; resize: vertical; }
+        textarea:focus, input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(42, 123, 140, 0.1); }
+        textarea { min-height: 80px; }
+        .field-group { margin-bottom: 20px; }
+        .field-group:last-child { margin-bottom: 0; }
+        .rate-item { border: 1px solid var(--border); border-radius: 6px; padding: 18px 20px; margin-bottom: 14px; background: var(--bg); }
+        .rate-label { font-weight: 600; color: var(--primary); font-size: 15px; display: block; margin-bottom: 4px; }
+        .rate-desc { font-size: 13px; color: var(--text-light); font-style: italic; margin-bottom: 14px; }
+        .rating-scale { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .rating-end { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+        .rating-btn { width: 40px; height: 40px; border: 2px solid var(--border); background: white; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; color: var(--text-light); transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .rating-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .rating-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
+        .score-display { margin-top: 20px; padding: 16px 20px; background: var(--bg-warm); border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .score-label { font-size: 13px; color: var(--text-light); font-weight: 500; }
+        .score-value { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .score-note { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+        .data-table th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table td { padding: 0; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .data-table td input { width: 100%; padding: 12px 14px; border: none; background: transparent; font-family: inherit; font-size: 14px; color: var(--text); }
+        .data-table td select { width: 100%; border: none; background: transparent; padding: 12px 14px; font-family: inherit; font-size: 14px; color: var(--text); }
+        .data-table td textarea { display: block; width: 100%; padding: 12px 14px; border: none; border-radius: 0; background: transparent; font-family: inherit; font-size: 14px; line-height: 1.45; color: var(--text); resize: none; overflow: hidden; min-height: 44px; vertical-align: top; }
+        .data-table td input:focus, .data-table td select:focus, .data-table td textarea:focus { outline: none; background: rgba(42,123,140,0.04); }
+        .data-table tr:last-child td { border-bottom: none; }
+        .save-status { font-size: 13px; color: var(--success); display: flex; align-items: center; gap: 6px; }
+        .save-status.hidden { visibility: hidden; }
+        .button-row { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .btn { padding: 12px 24px; border-radius: 4px; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background: #236a79; }
+        .btn-secondary { background: transparent; color: var(--text-light); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--text-light); }
+        footer { text-align: center; padding: 40px 24px; color: var(--text-muted); font-size: 13px; }
+        footer a { color: var(--accent); text-decoration: none; }
+        @media print { body { background: white; } .container { max-width: 100%; padding: 20px; } .button-row { display: none; } .section, .rate-item { border: 1px solid #ddd; break-inside: avoid; } .define, .rating-btn.selected { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+        @media screen and (max-width: 768px) { .container { padding: 24px 16px; } h1 { font-size: 28px; } .section { padding: 20px; } .data-table, .data-table thead, .data-table tbody, .data-table th, .data-table td, .data-table tr { display: block; } .data-table thead { display: none; } .data-table tr { margin-bottom: 16px; border: 1px solid var(--border); border-radius: 4px; } .data-table td { border-bottom: 1px solid var(--border); } .data-table tr:last-child td { border-bottom: 1px solid var(--border); } }
+        @media screen and (max-width: 480px) { .container { padding: 16px 12px; } .logo { height: 60px; } h1 { font-size: 24px; } .subtitle { font-size: 15px; } .rating-scale { gap: 6px; } .rating-btn { width: 36px; height: 36px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://coachingwomenofcolor.com/logo.webp" alt="Coaching Women of Color" class="logo">
+            <span class="module-label">Summer Integration &mdash; July / August</span>
+            <h1>Cultural Tax Inventory</h1>
+            <p class="subtitle">Some of the most demanding work you do never shows up in your job description, and rarely on your paycheck. Name it, so you can decide what to keep carrying.</p>
+            <p class="workbook-tag">Part of the Energy Reset &amp; Cultural Tax Workbook &middot; 3 of 3</p>
+        </header>
+
+        <div class="instructions">
+            <h3>How to use this worksheet</h3>
+            <p>This is a structural inventory, not a personal audit. The "cultural tax" is imposed by systems and environments. Carrying it is not a flaw in you. Rate the toll each form takes, sort what's chosen from what's imposed, then decide what to renegotiate. Answers auto-save as you type.</p>
+        </div>
+
+        <div class="define">
+            <p class="term">Cultural tax</p>
+            <p style="margin-top: 8px; font-size: 14.5px;">The extra, mostly invisible labor women of color are expected to carry at work, <strong>on top of</strong> the actual job. Being the "only" and the representative, the unpaid diversity work, code-switching, educating others about bias, and holding others' comfort. It is real work. It costs real energy. And it is usually neither counted nor compensated.</p>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="section" id="section-1">
+            <div class="section-header"><div class="step-number">1</div><div class="section-title">Inventory the Toll</div></div>
+            <div class="section-description">For each form of cultural tax, rate how much it costs you right now: 1 (rarely a factor) to 5 (a heavy, ongoing toll).</div>
+
+            <div class="rate-item">
+                <span class="rate-label">Being the "only" / the representative</span>
+                <p class="rate-desc">The only one like you in the room, and treated as speaking for everyone like you.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t1" data-rating="1">1</button><button class="rating-btn" data-key="t1" data-rating="2">2</button><button class="rating-btn" data-key="t1" data-rating="3">3</button><button class="rating-btn" data-key="t1" data-rating="4">4</button><button class="rating-btn" data-key="t1" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Uncompensated diversity / affinity / DEI work</span>
+                <p class="rate-desc">The committees, panels, ERGs, and recruiting favors that fall to you, off the side of your desk.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t2" data-rating="1">1</button><button class="rating-btn" data-key="t2" data-rating="2">2</button><button class="rating-btn" data-key="t2" data-rating="3">3</button><button class="rating-btn" data-key="t2" data-rating="4">4</button><button class="rating-btn" data-key="t2" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Code-switching</span>
+                <p class="rate-desc">Adjusting how you speak, dress, wear your hair, or show emotion to stay legible and safe.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t3" data-rating="1">1</button><button class="rating-btn" data-key="t3" data-rating="2">2</button><button class="rating-btn" data-key="t3" data-rating="3">3</button><button class="rating-btn" data-key="t3" data-rating="4">4</button><button class="rating-btn" data-key="t3" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Educating others about bias</span>
+                <p class="rate-desc">Explaining, correcting, or absorbing bias, and being expected to do it patiently.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t4" data-rating="1">1</button><button class="rating-btn" data-key="t4" data-rating="2">2</button><button class="rating-btn" data-key="t4" data-rating="3">3</button><button class="rating-btn" data-key="t4" data-rating="4">4</button><button class="rating-btn" data-key="t4" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Emotional support for other marginalized colleagues</span>
+                <p class="rate-desc">Being the safe person others come to: meaningful, and also a real draw on you.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t5" data-rating="1">1</button><button class="rating-btn" data-key="t5" data-rating="2">2</button><button class="rating-btn" data-key="t5" data-rating="3">3</button><button class="rating-btn" data-key="t5" data-rating="4">4</button><button class="rating-btn" data-key="t5" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Proving competence, again and again</span>
+                <p class="rate-desc">Having to re-earn credibility others are granted by default.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t6" data-rating="1">1</button><button class="rating-btn" data-key="t6" data-rating="2">2</button><button class="rating-btn" data-key="t6" data-rating="3">3</button><button class="rating-btn" data-key="t6" data-rating="4">4</button><button class="rating-btn" data-key="t6" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Managing others' comfort</span>
+                <p class="rate-desc">Softening yourself so others don't feel threatened: monitoring tone, smiling through, making it easy for everyone else.</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t7" data-rating="1">1</button><button class="rating-btn" data-key="t7" data-rating="2">2</button><button class="rating-btn" data-key="t7" data-rating="3">3</button><button class="rating-btn" data-key="t7" data-rating="4">4</button><button class="rating-btn" data-key="t7" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+            <div class="rate-item">
+                <span class="rate-label">Over-mentored, under-sponsored</span>
+                <p class="rate-desc">Rich in advice, short on advocacy: lots of coaching, little spent on your behalf. (See the Sponsor vs. Mentor Guide.)</p>
+                <div class="rating-scale"><span class="rating-end">Rarely</span>
+                    <button class="rating-btn" data-key="t8" data-rating="1">1</button><button class="rating-btn" data-key="t8" data-rating="2">2</button><button class="rating-btn" data-key="t8" data-rating="3">3</button><button class="rating-btn" data-key="t8" data-rating="4">4</button><button class="rating-btn" data-key="t8" data-rating="5">5</button>
+                    <span class="rating-end">Heavy toll</span></div>
+            </div>
+
+            <div class="score-display">
+                <span class="score-label">Your cultural tax load</span>
+                <span class="score-value"><span id="tax-score">0</span>/40</span>
+            </div>
+            <p class="score-note">This isn't a score to fix by trying harder. Carrying more is the environment's doing, not yours. A high number is information: it shows how much invisible work you're funding, and where renegotiation is most owed to you.</p>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="section" id="section-2">
+            <div class="section-header"><div class="step-number">2</div><div class="section-title">Chosen or Imposed?</div></div>
+            <div class="section-description">Not all of it should go. Some of this work is meaningful and yours by choice. The goal is discernment. Take your highest-rated items from Section 1 and put <strong>one per row</strong>, then work through each: name the specific form of tax &middot; mark whether it was <strong>chosen</strong> by you or <strong>imposed</strong> on you &middot; be honest about whether it actually advances <em>your</em> career &middot; decide to <strong>keep</strong> it, <strong>renegotiate</strong> the terms, or <strong>release</strong> it. Examples are pre-filled to show the range. <strong>Type over them with your own.</strong></div>
+            <table class="data-table">
+                <thead><tr><th>The form of cultural tax</th><th>Chosen or imposed?</th><th>Does it advance me?</th><th>Keep / renegotiate / release</th></tr></thead>
+                <tbody>
+                    <tr><td><textarea class="c-item" placeholder="e.g., chairing the DEI council"></textarea></td><td><select class="c-source"><option value="">Select</option><option>Chosen</option><option>Imposed</option><option>A bit of both</option></select></td><td><select class="c-advance"><option value="">Select</option><option>Yes</option><option>Somewhat</option><option>No</option></select></td><td><select class="c-decision"><option value="">Select</option><option>Keep</option><option>Renegotiate</option><option>Release</option></select></td></tr>
+                    <tr><td><textarea class="c-item" placeholder="e.g., being the go-to for every new hire of color"></textarea></td><td><select class="c-source"><option value="">Select</option><option>Chosen</option><option>Imposed</option><option>A bit of both</option></select></td><td><select class="c-advance"><option value="">Select</option><option>Yes</option><option>Somewhat</option><option>No</option></select></td><td><select class="c-decision"><option value="">Select</option><option>Keep</option><option>Renegotiate</option><option>Release</option></select></td></tr>
+                    <tr><td><textarea class="c-item" placeholder="e.g., code-switching in leadership meetings"></textarea></td><td><select class="c-source"><option value="">Select</option><option>Chosen</option><option>Imposed</option><option>A bit of both</option></select></td><td><select class="c-advance"><option value="">Select</option><option>Yes</option><option>Somewhat</option><option>No</option></select></td><td><select class="c-decision"><option value="">Select</option><option>Keep</option><option>Renegotiate</option><option>Release</option></select></td></tr>
+                    <tr><td><textarea class="c-item" placeholder="e.g., explaining bias after a microaggression"></textarea></td><td><select class="c-source"><option value="">Select</option><option>Chosen</option><option>Imposed</option><option>A bit of both</option></select></td><td><select class="c-advance"><option value="">Select</option><option>Yes</option><option>Somewhat</option><option>No</option></select></td><td><select class="c-decision"><option value="">Select</option><option>Keep</option><option>Renegotiate</option><option>Release</option></select></td></tr>
+                    <tr><td><textarea class="c-item" placeholder="e.g., emotional support for colleagues who are struggling"></textarea></td><td><select class="c-source"><option value="">Select</option><option>Chosen</option><option>Imposed</option><option>A bit of both</option></select></td><td><select class="c-advance"><option value="">Select</option><option>Yes</option><option>Somewhat</option><option>No</option></select></td><td><select class="c-decision"><option value="">Select</option><option>Keep</option><option>Renegotiate</option><option>Release</option></select></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="section" id="section-3">
+            <div class="section-header"><div class="step-number">3</div><div class="section-title">Renegotiation &amp; Recognition Scripts</div></div>
+            <div class="section-description">Invisible work stays invisible until you name it out loud. Draft language to either be recognized/compensated for it, or to hand it back.</div>
+            <div class="field-group"><label>To make invisible work visible (ask for it to be counted or credited):</label><textarea id="s-visible" placeholder="e.g., 'The recruiting and ERG work has grown into a real time commitment. I'd like it reflected in my goals and reviewed as part of my performance.'"></textarea></div>
+            <div class="field-group"><label>To decline or hand something back (without guilt or over-explaining):</label><textarea id="s-decline" placeholder="e.g., 'I'm not able to take the committee on this year. I'd suggest rotating it so it doesn't fall to the same few of us.'"></textarea></div>
+            <div class="field-group"><label>To ask for the sponsorship the advice hasn't turned into (close the mentor&ndash;sponsor gap):</label><textarea id="s-sponsor" placeholder="e.g., 'You've given me great advice. What I need now is advocacy. Would you put my name forward for X?'"></textarea></div>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="section" id="section-4">
+            <div class="section-header"><div class="step-number">4</div><div class="section-title">Reflect &amp; Decide</div></div>
+            <div class="section-description">You get to choose where your energy goes. Make one decision you'll act on.</div>
+            <div class="field-group"><label>The one form of cultural tax I will stop carrying uncompensated, and my first step:</label><textarea id="r-stop" placeholder="Name it, and the first small move to renegotiate or release it."></textarea></div>
+            <div class="field-group"><label>The one I'll keep on purpose, because it's mine and it matters to me:</label><textarea id="r-keep" placeholder="Reclaiming it as a choice changes what it costs."></textarea></div>
+            <div class="field-group"><label>Who I'll say this out loud to, so it's real:</label><input type="text" id="r-who" placeholder="e.g., my manager, my accountability partner, my Lab cohort"></div>
+        </div>
+
+        <div class="button-row">
+            <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+            <span class="save-status hidden" id="save-status">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Auto-saved
+            </span>
+            <button class="btn btn-primary" onclick="window.print()">Print / PDF</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Executive Leadership Lab &mdash; Summer Integration</p>
+        <p><a href="https://coachingwomenofcolor.com">Coaching Women of Color&reg;</a></p>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'cwc-cultural-tax-inventory-v1';
+        const CLASS_FIELDS = ['c-item','c-source','c-advance','c-decision'];
+        function updateScore() {
+            let total = 0;
+            document.querySelectorAll('.rating-btn.selected').forEach(btn => { total += parseInt(btn.dataset.rating); });
+            document.getElementById('tax-score').textContent = total;
+        }
+        function saveData() {
+            const data = { ratings: {} };
+            document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(el => { if (el.id) data[el.id] = el.value; });
+            CLASS_FIELDS.forEach(cls => { document.querySelectorAll('.' + cls).forEach((el, i) => { data[cls + '-' + i] = el.value; }); });
+            document.querySelectorAll('.rating-btn.selected').forEach(btn => { data.ratings[btn.dataset.key] = btn.dataset.rating; });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            const status = document.getElementById('save-status');
+            status.classList.remove('hidden');
+            setTimeout(() => status.classList.add('hidden'), 2000);
+        }
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+            const data = JSON.parse(saved);
+            Object.keys(data).forEach(key => { const el = document.getElementById(key); if (el) el.value = data[key]; });
+            CLASS_FIELDS.forEach(cls => { document.querySelectorAll('.' + cls).forEach((el, i) => { if (data[cls + '-' + i] !== undefined) el.value = data[cls + '-' + i]; }); });
+            if (data.ratings) {
+                Object.keys(data.ratings).forEach(key => {
+                    const btn = document.querySelector('.rating-btn[data-key="' + key + '"][data-rating="' + data.ratings[key] + '"]');
+                    if (btn) btn.classList.add('selected');
+                });
+            }
+            updateScore();
+        }
+        function clearAll() {
+            if (!confirm('Clear all saved data? This cannot be undone.')) return;
+            localStorage.removeItem(STORAGE_KEY);
+            document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(el => el.value = '');
+            document.querySelectorAll('select').forEach(el => el.value = '');
+            document.querySelectorAll('.rating-btn.selected').forEach(btn => btn.classList.remove('selected'));
+            updateScore();
+        }
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                updateScore();
+                saveData();
+            });
+        });
+        document.addEventListener('input', saveData);
+        document.addEventListener('change', saveData);
+        loadData();
+        function autoGrowCell(el){
+            el.style.height = 'auto';
+            var h = el.scrollHeight;
+            if (!el.value && el.placeholder) { el.value = el.placeholder; el.style.height = 'auto'; h = Math.max(h, el.scrollHeight); el.value = ''; el.style.height = 'auto'; }
+            el.style.height = h + 'px';
+        }
+        var cellAreas = document.querySelectorAll('.data-table td textarea');
+        cellAreas.forEach(function(t){ t.addEventListener('input', function(){ autoGrowCell(t); }); autoGrowCell(t); });
+        window.addEventListener('resize', function(){ cellAreas.forEach(autoGrowCell); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Negotiation Follow-Up Plan | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+            --success: #4A9B7F;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { height: 80px; margin-bottom: 24px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; display: block; }
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .subtitle { font-size: 18px; color: var(--text-light); max-width: 600px; margin: 0 auto; }
+
+        .advocacy-equation {
+            background: var(--primary);
+            color: white;
+            padding: 20px 32px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            gap: 12px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .eq-item h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .eq-item p { font-size: 11px; opacity: 0.75; }
+        .eq-op { font-size: 24px; font-weight: 300; opacity: 0.6; }
+
+        section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600; color: var(--primary); }
+        .section-header p { font-size: 14px; color: var(--text-light); margin-top: 2px; }
+
+        .instructions {
+            background: var(--bg-warm);
+            border-left: 3px solid var(--accent-warm);
+            padding: 16px 20px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+            margin-top: 18px;
+        }
+
+        label:first-of-type { margin-top: 0; }
+
+        input[type="text"], input[type="date"], textarea, select {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text);
+            background: var(--bg);
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+        }
+
+        textarea { min-height: 80px; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+        /* Outcome selector */
+        .outcome-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .outcome-option {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .outcome-option:hover { border-color: var(--accent); }
+        .outcome-option.selected { border-color: var(--accent); background: #EBF5F7; }
+        .outcome-option .opt-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+        .outcome-option .opt-label { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+        .outcome-option .opt-desc { font-size: 12px; color: var(--text-light); }
+
+        /* Email template */
+        .email-template {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .email-template .email-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .email-field {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .email-field strong { color: var(--text-light); }
+
+        .email-body {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 16px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .fill-field {
+            display: inline-block;
+            background: #FFF3CD;
+            border: 1px solid #F0C020;
+            border-radius: 3px;
+            padding: 1px 6px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #7A5500;
+        }
+
+        /* Timeline */
+        .timeline { margin-top: 8px; }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .timeline-item:not(:last-child) .tl-dot::after {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 36px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .tl-dot {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 4px;
+        }
+
+        .tl-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 1;
+            position: relative;
+        }
+
+        .tl-content { padding: 0 0 24px 16px; }
+        .tl-content h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
+        .tl-content .tl-timing { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .tl-content textarea { min-height: 60px; }
+
+        /* Checklist */
+        .checklist { list-style: none; }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s;
+            margin-bottom: 4px;
+        }
+
+        .checklist li:hover { background: var(--bg-warm); }
+        .checklist li.checked { background: #EDF7F3; }
+
+        .check-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+            font-size: 12px;
+        }
+
+        .checklist li.checked .check-box { background: var(--success); border-color: var(--success); color: white; }
+        .checklist li.checked .check-text { text-decoration: line-through; color: var(--text-muted); }
+        .check-text { font-size: 14px; line-height: 1.5; }
+
+        /* Ratings */
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-warm);
+        }
+
+        .rating-row:last-child { border-bottom: none; }
+        .rating-label { flex: 1; font-size: 14px; color: var(--text); }
+        .rating-scale { display: flex; gap: 6px; }
+
+        .rating-dot {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-muted);
+        }
+
+        .rating-dot:hover { border-color: var(--accent); color: var(--accent); }
+        .rating-dot.selected { background: var(--accent); border-color: var(--accent); color: white; }
+
+        /* Forward box */
+        .forward-box {
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .forward-box h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        /* WOC note */
+        .woc-note {
+            background: #F3F0FA;
+            border-left: 3px solid #9333EA;
+            padding: 16px 20px;
+            border-radius: 0 6px 6px 0;
+            margin: 20px 0;
+        }
+
+        .woc-note .woc-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9333EA;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .woc-note p { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+        /* Save bar */
+        .save-bar {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        .save-status { font-size: 13px; color: var(--text-muted); }
+        .save-status.saved { color: var(--success); }
+
+        .btn-save {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-save:hover { opacity: 0.85; }
+
+        .btn-clear {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 24px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .advocacy-equation { grid-template-columns: 1fr; gap: 8px; }
+            .eq-op { display: none; }
+            .two-col, .three-col, .outcome-selector { grid-template-columns: 1fr; }
+            h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <img src="https://coachingwomenofcolor.com/logo.webp" alt="Coaching Women of Color" class="logo">
+        <span class="module-label">Module 5 — May</span>
+        <h1>Post-Negotiation Follow-Up Plan</h1>
+        <p class="subtitle">Document your outcome, protect the agreement, and keep the momentum going.</p>
+    </header>
+
+    <div class="advocacy-equation">
+        <div class="eq-item">
+            <h3>Know Your Worth</h3>
+            <p>Market data + impact evidence</p>
+        </div>
+        <div class="eq-op">+</div>
+        <div class="eq-item">
+            <h3>Script Your Ask</h3>
+            <p>Four-part negotiation script</p>
+        </div>
+        <div class="eq-op">+</div>
+        <div class="eq-item">
+            <h3>Own the Objection</h3>
+            <p>Respond, redirect, persist</p>
+        </div>
+        <div class="eq-op">=</div>
+        <div class="eq-item">
+            <h3>Compensation Earned</h3>
+            <p>Title, scope &amp; pay secured</p>
+        </div>
+    </div>
+
+    <!-- Section 1: Outcome Documentation -->
+    <section>
+        <div class="section-header">
+            <div class="step-number">1</div>
+            <div>
+                <h2>Record Your Outcome</h2>
+                <p>Capture exactly what happened while the details are fresh.</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            Complete this within 24 hours of your negotiation conversation. Accurate documentation protects you and creates a paper trail you can reference at your next review.
+        </div>
+
+        <label>What did you ask for?</label>
+        <textarea id="what-you-asked" placeholder="Describe your specific ask — title, salary, scope, equity, flex schedule, etc."></textarea>
+
+        <div class="two-col">
+            <div>
+                <label>Date of the negotiation conversation</label>
+                <input type="date" id="nego-date">
+            </div>
+            <div>
+                <label>Format (in-person / video / phone)</label>
+                <input type="text" id="meeting-format" placeholder="e.g., In-person 1:1">
+            </div>
+        </div>
+
+        <label>Who was in the conversation?</label>
+        <input type="text" id="who-present" placeholder="Manager name, HR rep, skip-level, etc.">
+
+        <label>Select your outcome</label>
+        <div class="outcome-selector">
+            <div class="outcome-option" onclick="selectOutcome('win', this)">
+                <span class="opt-icon">🎉</span>
+                <div class="opt-label">Full Win</div>
+                <div class="opt-desc">Got exactly what you asked for</div>
+            </div>
+            <div class="outcome-option" onclick="selectOutcome('partial', this)">
+                <span class="opt-icon">⚡</span>
+                <div class="opt-label">Partial Win</div>
+                <div class="opt-desc">Got something — more to negotiate</div>
+            </div>
+            <div class="outcome-option" onclick="selectOutcome('continue', this)">
+                <span class="opt-icon">🔄</span>
+                <div class="opt-label">Conversation Continues</div>
+                <div class="opt-desc">Follow-up meeting still needed</div>
+            </div>
+        </div>
+        <input type="hidden" id="outcome-selected" value="">
+
+        <label>What specifically was agreed to?</label>
+        <textarea id="what-agreed" placeholder="Be precise: dollar amounts, effective dates, new title, scope changes, next conversation date..."></textarea>
+
+        <label>What was NOT granted (yet)?</label>
+        <textarea id="what-not-granted" placeholder="Anything deferred, declined, or left open for future discussion..."></textarea>
+    </section>
+
+    <!-- Section 2: Confirmation Email -->
+    <section>
+        <div class="section-header">
+            <div class="step-number">2</div>
+            <div>
+                <h2>Send a Confirmation Email</h2>
+                <p>Always put the agreement in writing — within 24 hours.</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            A brief follow-up email creates a written record that protects you. It is not aggressive — it is professional. Use the template below as your starting point and customize it with your own words.
+        </div>
+
+        <div class="woc-note">
+            <div class="woc-label">Why This Matters for WOC</div>
+            <p>Verbal agreements can be forgotten or reframed. A written confirmation means there is a record your manager acknowledged. This is not distrust — it is professional documentation. Leaders in other demographics do this routinely.</p>
+        </div>
+
+        <div class="email-template">
+            <span class="email-label">Email Template — Customize Before Sending</span>
+            <div class="email-field"><strong>To:</strong> <span class="fill-field">[Manager Name]</span></div>
+            <div class="email-field"><strong>Subject:</strong> Follow-Up — Our Conversation on <span class="fill-field">[Date]</span></div>
+            <div class="email-body">
+                Hi <span class="fill-field">[First Name]</span>,<br><br>
+                Thank you for making time to speak with me on <span class="fill-field">[Date]</span>. I wanted to follow up in writing to confirm what we discussed.<br><br>
+                As I understood it, we agreed to: <span class="fill-field">[summarize the agreed outcome — be specific]</span>.<br><br>
+                <span class="fill-field">[Optional: The effective date for these changes will be ________.]</span><br><br>
+                <span class="fill-field">[Optional: We also discussed reconnecting on ________ to revisit ________.]</span><br><br>
+                Please let me know if I've missed or mischaracterized anything. I'm looking forward to <span class="fill-field">[next step / continued partnership]</span>.<br><br>
+                Thank you,<br>
+                <span class="fill-field">[Your Name]</span>
+            </div>
+        </div>
+
+        <label>Draft your personalized version here</label>
+        <textarea id="email-draft" placeholder="Write your actual email here before sending — adapt the template above to your voice and situation..."></textarea>
+
+        <div class="two-col">
+            <div>
+                <label>Date email sent (or target date)</label>
+                <input type="date" id="email-date">
+            </div>
+            <div>
+                <label>Did they respond? Summary:</label>
+                <input type="text" id="confirmation-response" placeholder="Any corrections or acknowledgment?">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: 30-Day Follow-Through Checklist -->
+    <section>
+        <div class="section-header">
+            <div class="step-number">3</div>
+            <div>
+                <h2>30-Day Follow-Through Checklist</h2>
+                <p>What was promised must actually be delivered — track it.</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            Agreements sometimes stall after the conversation. This checklist is your accountability tool. Click each item as it's confirmed. If something isn't happening, you have documentation that it was promised.
+        </div>
+
+        <ul class="checklist" id="followup-checklist">
+            <li onclick="toggleCheck(this)" data-key="check-email">
+                <div class="check-box">✓</div>
+                <span class="check-text">Sent written confirmation email within 24 hours of the conversation</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-hr">
+                <div class="check-box">✓</div>
+                <span class="check-text">Confirmed HR / compensation team has been notified (if applicable)</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-paycheck">
+                <div class="check-box">✓</div>
+                <span class="check-text">Verified salary change appears in paycheck or updated offer letter</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-title">
+                <div class="check-box">✓</div>
+                <span class="check-text">Confirmed title update in HR system, email signature, and LinkedIn</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-scope">
+                <div class="check-box">✓</div>
+                <span class="check-text">New scope or responsibilities are reflected in my updated role description</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-followup-mtg">
+                <div class="check-box">✓</div>
+                <span class="check-text">Scheduled follow-up meeting if full outcome was not reached</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-equity">
+                <div class="check-box">✓</div>
+                <span class="check-text">Reviewed equity, bonus, or PTO terms in writing (if applicable)</span>
+            </li>
+            <li onclick="toggleCheck(this)" data-key="check-calendar">
+                <div class="check-box">✓</div>
+                <span class="check-text">Added next performance or compensation review date to my calendar</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Section 4: Lessons Learned -->
+    <section>
+        <div class="section-header">
+            <div class="step-number">4</div>
+            <div>
+                <h2>Lessons Learned</h2>
+                <p>Every negotiation is a data point. Build on what worked.</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            Rate yourself honestly — not harshly. This is for your growth, not your grade. 1 = struggled with this, 5 = handled it well.
+        </div>
+
+        <div class="rating-row">
+            <div class="rating-label">I was prepared and knew my market data going in</div>
+            <div class="rating-scale" data-key="r-prepared">
+                <div class="rating-dot" onclick="setRating('r-prepared', 1, this)">1</div>
+                <div class="rating-dot" onclick="setRating('r-prepared', 2, this)">2</div>
+                <div class="rating-dot" onclick="setRating('r-prepared', 3, this)">3</div>
+                <div class="rating-dot" onclick="setRating('r-prepared', 4, this)">4</div>
+                <div class="rating-dot" onclick="setRating('r-prepared', 5, this)">5</div>
+            </div>
+        </div>
+        <div class="rating-row">
+            <div class="rating-label">I stated my ask clearly without over-explaining or apologizing</div>
+            <div class="rating-scale" data-key="r-clear-ask">
+                <div class="rating-dot" onclick="setRating('r-clear-ask', 1, this)">1</div>
+                <div class="rating-dot" onclick="setRating('r-clear-ask', 2, this)">2</div>
+                <div class="rating-dot" onclick="setRating('r-clear-ask', 3, this)">3</div>
+                <div class="rating-dot" onclick="setRating('r-clear-ask', 4, this)">4</div>
+                <div class="rating-dot" onclick="setRating('r-clear-ask', 5, this)">5</div>
+            </div>
+        </div>
+        <div class="rating-row">
+            <div class="rating-label">I handled objections without backing down immediately</div>
+            <div class="rating-scale" data-key="r-objections">
+                <div class="rating-dot" onclick="setRating('r-objections', 1, this)">1</div>
+                <div class="rating-dot" onclick="setRating('r-objections', 2, this)">2</div>
+                <div class="rating-dot" onclick="setRating('r-objections', 3, this)">3</div>
+                <div class="rating-dot" onclick="setRating('r-objections', 4, this)">4</div>
+                <div class="rating-dot" onclick="setRating('r-objections', 5, this)">5</div>
+            </div>
+        </div>
+        <div class="rating-row">
+            <div class="rating-label">I stayed calm and professional throughout the conversation</div>
+            <div class="rating-scale" data-key="r-calm">
+                <div class="rating-dot" onclick="setRating('r-calm', 1, this)">1</div>
+                <div class="rating-dot" onclick="setRating('r-calm', 2, this)">2</div>
+                <div class="rating-dot" onclick="setRating('r-calm', 3, this)">3</div>
+                <div class="rating-dot" onclick="setRating('r-calm', 4, this)">4</div>
+                <div class="rating-dot" onclick="setRating('r-calm', 5, this)">5</div>
+            </div>
+        </div>
+        <div class="rating-row">
+            <div class="rating-label">I advocated for the full package — not just salary</div>
+            <div class="rating-scale" data-key="r-package">
+                <div class="rating-dot" onclick="setRating('r-package', 1, this)">1</div>
+                <div class="rating-dot" onclick="setRating('r-package', 2, this)">2</div>
+                <div class="rating-dot" onclick="setRating('r-package', 3, this)">3</div>
+                <div class="rating-dot" onclick="setRating('r-package', 4, this)">4</div>
+                <div class="rating-dot" onclick="setRating('r-package', 5, this)">5</div>
+            </div>
+        </div>
+
+        <label style="margin-top: 24px;">What worked well? (things to repeat next time)</label>
+        <textarea id="what-worked" placeholder="Be specific — what did you say, do, or prepare that made a difference?"></textarea>
+
+        <label>What would you do differently?</label>
+        <textarea id="do-differently" placeholder="No judgment — just useful data for your next negotiation..."></textarea>
+
+        <label>One sentence to carry forward from this experience</label>
+        <input type="text" id="one-sentence" placeholder="e.g., 'I asked and the world didn't end — I'll ask louder next time.'">
+    </section>
+
+    <!-- Section 5: If the Answer Was No -->
+    <section>
+        <div class="section-header">
+            <div class="step-number">5</div>
+            <div>
+                <h2>If the Answer Was "No" or "Not Yet"</h2>
+                <p>A no today is a negotiating position, not a verdict.</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            Complete this section if you did not receive what you asked for. A refusal is information. Use it to plan your next move with more precision.
+        </div>
+
+        <div class="woc-note">
+            <div class="woc-label">Remember This</div>
+            <p>"No" often means "not the way you asked" or "not right now." WOC are twice as likely to accept an initial no as final — when it isn't. Your next move matters more than their first response.</p>
+        </div>
+
+        <label>What reason were you given for the "no"?</label>
+        <textarea id="no-reason" placeholder="What exactly did they say? Use their words if you can remember them..."></textarea>
+
+        <div class="two-col">
+            <div>
+                <label>Do you believe this reason is real?</label>
+                <select id="no-belief">
+                    <option value="">— Select —</option>
+                    <option>Yes, it seems genuine</option>
+                    <option>Partially — there may be more to it</option>
+                    <option>No, I think it's a deflection</option>
+                    <option>Not sure yet</option>
+                </select>
+            </div>
+            <div>
+                <label>Did you ask for a timeline to revisit?</label>
+                <select id="timeline-asked">
+                    <option value="">— Select —</option>
+                    <option>Yes — we set a specific date</option>
+                    <option>Yes — they gave a vague answer</option>
+                    <option>No — I will follow up to set one</option>
+                    <option>Not applicable</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="forward-box">
+            <h4>My Next Negotiation Move</h4>
+
+            <label>Revisit date (put this on your calendar today)</label>
+            <input type="date" id="revisit-date">
+
+            <label style="margin-top: 16px;">What additional evidence or leverage will I bring next time?</label>
+            <textarea id="next-leverage" placeholder="New market data, completed projects, external offer, expanded scope, peer comparison, new certifications..."></textarea>
+
+            <label>Who is my internal advocate I can activate before the next conversation?</label>
+            <input type="text" id="internal-advocate" placeholder="Sponsor, mentor, or senior ally who can vouch for my value...">
+        </div>
+    </section>
+
+    <!-- Section 6: Forward Planning -->
+    <section>
+        <div class="section-header">
+            <div class="step-number">6</div>
+            <div>
+                <h2>Keep Building Your Case Year-Round</h2>
+                <p>Your next negotiation starts the day after this one ends.</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            Top negotiators don't wait until review season to build their case. Set up the habits and systems now that make your next ask even stronger.
+        </div>
+
+        <div class="three-col">
+            <div>
+                <label>Next performance review date</label>
+                <input type="date" id="next-review-date">
+            </div>
+            <div>
+                <label>Next compensation discussion target</label>
+                <input type="date" id="next-comp-date">
+            </div>
+            <div>
+                <label>Next salary market check</label>
+                <input type="date" id="next-market-date">
+            </div>
+        </div>
+
+        <label style="margin-top: 20px;">Where will I keep my year-round brag document?</label>
+        <input type="text" id="brag-doc-plan" placeholder="e.g., Google Doc called 'My Wins', Notion, email folder, monthly note to self...">
+
+        <label>One commitment I'm making to advocate for myself before my next review</label>
+        <textarea id="commitment" placeholder="Be specific and time-bound — what will you do, and by when?"></textarea>
+
+        <div class="woc-note">
+            <div class="woc-label">Module 5 Reminder</div>
+            <p>Advocacy is not a one-time event — it is a discipline. Every time you document a win, negotiate a boundary, or ask for what you have earned, you are building a skill that compounds over your career. The leaders who negotiate best are the ones who do it most consistently.</p>
+        </div>
+    </section>
+
+    <!-- Save bar -->
+    <div class="save-bar">
+        <span class="save-status" id="save-status">Unsaved changes</span>
+        <div style="display: flex; gap: 12px;">
+            <button class="btn-clear" onclick="clearAll()">Clear All</button>
+            <button class="btn-save" onclick="saveAll()">Save Progress</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Executive Leadership Lab · Module 5: Advocacy &amp; Negotiation</p>
+        <p style="margin-top: 8px;"><a href="https://coachingwomenofcolor.com" target="_blank">coachingwomenofcolor.com</a></p>
+    </footer>
+
+</div>
+
+<script>
+    const STORAGE_KEY = 'cwc-post-negotiation-v1';
+
+    function selectOutcome(value, el) {
+        document.querySelectorAll('.outcome-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        document.getElementById('outcome-selected').value = value;
+        autoSave();
+    }
+
+    function toggleCheck(el) {
+        el.classList.toggle('checked');
+        autoSave();
+    }
+
+    function setRating(key, value, el) {
+        const scale = el.closest('.rating-scale');
+        scale.querySelectorAll('.rating-dot').forEach((dot, i) => {
+            dot.classList.toggle('selected', i < value);
+        });
+        autoSave();
+    }
+
+    document.querySelectorAll('input, textarea, select').forEach(el => {
+        el.addEventListener('input', autoSave);
+        el.addEventListener('change', autoSave);
+    });
+
+    function autoSave() {
+        saveAll(true);
+    }
+
+    function saveAll(silent) {
+        const data = {};
+
+        document.querySelectorAll('input[id], textarea[id], select[id]').forEach(el => {
+            data[el.id] = el.value;
+        });
+
+        data.checklist = {};
+        document.querySelectorAll('#followup-checklist li').forEach(li => {
+            data.checklist[li.dataset.key] = li.classList.contains('checked');
+        });
+
+        data.ratings = {};
+        document.querySelectorAll('.rating-scale').forEach(scale => {
+            data.ratings[scale.dataset.key] = scale.querySelectorAll('.rating-dot.selected').length;
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+        const status = document.getElementById('save-status');
+        if (!silent) {
+            status.textContent = 'Saved ✓';
+            status.classList.add('saved');
+            setTimeout(() => { status.textContent = 'Auto-saving enabled'; status.classList.remove('saved'); }, 2000);
+        } else {
+            status.textContent = 'Auto-saving...';
+            status.classList.remove('saved');
+        }
+    }
+
+    function loadAll() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        try {
+            const data = JSON.parse(raw);
+
+            document.querySelectorAll('input[id], textarea[id]').forEach(el => {
+                if (data[el.id] !== undefined) el.value = data[el.id];
+            });
+
+            document.querySelectorAll('select[id]').forEach(el => {
+                if (data[el.id]) el.value = data[el.id];
+            });
+
+            if (data['outcome-selected']) {
+                const map = { win: 0, partial: 1, continue: 2 };
+                const idx = map[data['outcome-selected']];
+                if (idx !== undefined) document.querySelectorAll('.outcome-option')[idx]?.classList.add('selected');
+            }
+
+            if (data.checklist) {
+                document.querySelectorAll('#followup-checklist li').forEach(li => {
+                    if (data.checklist[li.dataset.key]) li.classList.add('checked');
+                });
+            }
+
+            if (data.ratings) {
+                document.querySelectorAll('.rating-scale').forEach(scale => {
+                    const val = data.ratings[scale.dataset.key] || 0;
+                    scale.querySelectorAll('.rating-dot').forEach((dot, i) => {
+                        dot.classList.toggle('selected', i < val);
+                    });
+                });
+            }
+
+            const status = document.getElementById('save-status');
+            status.textContent = 'Progress loaded ✓';
+            status.classList.add('saved');
+            setTimeout(() => { status.textContent = 'Auto-saving enabled'; status.classList.remove('saved'); }, 2000);
+
+        } catch(e) { console.error('Load error:', e); }
+    }
+
+    function clearAll() {
+        if (!confirm('Clear all saved data for this worksheet? This cannot be undone.')) return;
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll('input[id], textarea[id]').forEach(el => el.value = '');
+        document.querySelectorAll('select[id]').forEach(el => el.selectedIndex = 0);
+        document.querySelectorAll('.outcome-option').forEach(o => o.classList.remove('selected'));
+        document.getElementById('outcome-selected').value = '';
+        document.querySelectorAll('#followup-checklist li').forEach(li => li.classList.remove('checked'));
+        document.querySelectorAll('.rating-dot').forEach(d => d.classList.remove('selected'));
+        const status = document.getElementById('save-status');
+        status.textContent = 'Cleared';
+        status.classList.remove('saved');
+    }
+
+    loadAll();
+</script>
+</body>
+</html>

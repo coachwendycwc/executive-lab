@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Storytelling: Master Your Narrative | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        @media print {
+            body { overflow: visible; height: auto; background: white; }
+            .presentation { height: auto; }
+            .slide {
+                position: relative; opacity: 1; visibility: visible; transform: none;
+                page-break-after: always; height: 100vh; padding: 40px 60px;
+            }
+            .slide::before { display: none; }
+            .nav-controls, .progress-bar { display: none; }
+            .slide-title, .slide-dark { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary); color: var(--text); overflow: hidden; height: 100vh;
+        }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: var(--accent); transition: width 0.4s ease; z-index: 1000;
+        }
+
+        .presentation { width: 100%; height: 100vh; position: relative; }
+
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 80px 120px 140px 120px;
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: opacity 0.4s ease, visibility 0s 0.4s, transform 0.4s ease;
+            background: var(--bg);
+        }
+        .slide::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03; pointer-events: none; z-index: 0;
+        }
+        .slide > * { position: relative; z-index: 1; }
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.4s ease 0.05s, visibility 0s, transform 0.4s ease 0.05s; z-index: 1; }
+
+        /* Title slide: dark gradient only (no backdrop image). Other dark slides remain gradient-only. */
+        .slide-title { background: linear-gradient(135deg, #1A1A1A 0%, #2d3a3d 50%, #1A1A1A 100%); color: white; }
+        .slide-title > * { position: relative; z-index: 1; }
+        .slide-title .section-label { color: rgba(255,255,255,0.5); }
+        .slide-title h1 { color: white; font-size: 56px; }
+        .slide-title .lead { color: rgba(255,255,255,0.7); }
+        .slide-title .title-meta { border-top-color: rgba(255,255,255,0.1); }
+        .slide-title .meta-item { color: rgba(255,255,255,0.4); }
+        .slide-title .module-label { color: rgba(255,255,255,0.4); }
+
+        .slide-dark { background: linear-gradient(135deg, #1A1A1A 0%, #243034 60%, #1A1A1A 100%); color: white; }
+        .slide-dark .section-label { color: rgba(255,255,255,0.4); }
+        .slide-dark h1, .slide-dark h2 { color: white; }
+        .slide-dark p { color: rgba(255,255,255,0.7); }
+        .slide-dark .module-label { color: rgba(255,255,255,0.4); }
+        .slide-dark .feature-text h4 { color: white; }
+        .slide-dark .feature-text p { color: rgba(255,255,255,0.7); }
+        .slide-dark .feature-item { border-bottom-color: rgba(255,255,255,0.12); }
+
+        .slide-quote { background: var(--bg-warm); }
+
+        .slide-header {
+            position: absolute; top: 40px; left: 60px; right: 60px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { height: 80px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; }
+
+        .slide-content { max-width: 960px; width: 100%; }
+
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 56px; font-weight: 700; color: var(--primary); letter-spacing: -1px; line-height: 1.1; margin-bottom: 24px; }
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; font-weight: 600; color: var(--primary); letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 20px; }
+        p, .lead { font-size: 18px; line-height: 1.6; color: var(--text-light); }
+        .lead { font-size: 20px; color: var(--text); }
+
+        .section-label { display: block; font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 20px; }
+
+        .title-meta { display: flex; gap: 32px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .meta-item { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Cards Grid */
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+        .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+        .card { background: white; border: 1px solid var(--border); padding: 28px; border-radius: 2px; }
+        .card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 600; color: var(--primary); margin-bottom: 10px; }
+        .card p { font-size: 15px; color: var(--text-light); line-height: 1.5; margin: 0; }
+        .card .card-tag { display: block; font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+        /* Two Column */
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 40px; }
+        .column h4 { font-size: 15px; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--accent); }
+        .column ul { list-style: none; }
+        .column li { font-size: 15px; color: var(--text-light); padding: 12px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+        .column li:last-child { border-bottom: none; }
+
+        /* Feature List */
+        .feature-list { margin-top: 40px; }
+        .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+        .feature-item:last-child { border-bottom: none; }
+        .feature-number { width: 32px; height: 32px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; flex-shrink: 0; }
+        .feature-text h4 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+        .feature-text p { font-size: 15px; color: var(--text-light); margin: 0; }
+
+        /* Quote */
+        .quote-text { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 400; color: var(--primary); line-height: 1.4; max-width: 800px; }
+        .slide-dark .quote-text { color: white; }
+        .quote-text::before { content: '\201C'; display: block; font-size: 64px; color: var(--accent); line-height: 1; margin-bottom: 16px; }
+
+        /* Equation */
+        .equation { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 48px; flex-wrap: wrap; }
+        .equation-part { background: white; border: 1px solid var(--border); padding: 20px 28px; font-size: 16px; font-weight: 600; color: var(--primary); border-radius: 2px; }
+        .equation-result { background: var(--accent); color: white; border-color: var(--accent); }
+        .equation-symbol { font-size: 24px; font-weight: 300; color: var(--text-muted); }
+
+        /* Callout */
+        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 28px; margin-top: 40px; }
+        .callout p { font-size: 15px; color: var(--text); margin: 0; line-height: 1.6; }
+        .callout strong { color: var(--primary); }
+
+        /* Roadmap Steps */
+        .roadmap-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+        .roadmap-step { background: white; border: 1px solid var(--border); padding: 24px; border-radius: 2px; display: flex; align-items: flex-start; gap: 16px; position: relative; }
+        .step-number { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white; flex-shrink: 0; }
+        .step-content h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+        /* Activity Meta */
+        .activity-meta { display: inline-block; margin-top: 32px; padding: 10px 24px; background: var(--bg-warm); border: 1px solid var(--border); border-radius: 2px; font-size: 13px; color: var(--text-light); font-weight: 500; }
+
+        .ell-mark { position: absolute; right: 60px; bottom: 30px; font-size: 13px; font-weight: 600; color: var(--text-muted); letter-spacing: 3px; opacity: 0.3; }
+        .slide-dark .ell-mark, .slide-title .ell-mark { color: rgba(255,255,255,0.4); }
+
+        /* Navigation */
+        .nav-controls { position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 24px; z-index: 1000; }
+        .nav-btn { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+        .nav-btn:hover { background: var(--primary); color: var(--bg); }
+        .nav-btn:disabled { border-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        .nav-btn:disabled:hover { background: transparent; color: var(--text-muted); }
+        .nav-btn svg { width: 20px; height: 20px; }
+        .slide-counter { font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px; }
+
+        @media screen and (max-width: 1024px) {
+            .slide { padding: 60px 80px 120px 80px; }
+            .slide-header { top: 30px; left: 40px; right: 40px; }
+            h1 { font-size: 48px; } .slide-title h1 { font-size: 52px; }
+            h2 { font-size: 36px; } .quote-text { font-size: 28px; }
+            .cards-grid { gap: 24px; } .card { padding: 24px; }
+            .two-column { gap: 48px; }
+            .ell-mark { right: 40px; bottom: 30px; } .roadmap-steps { gap: 16px; } .roadmap-step { padding: 20px; }
+        }
+        @media screen and (max-width: 768px) {
+            .slide { padding: 100px 40px 140px; }
+            .slide-header { top: 20px; left: 24px; right: 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+            .logo { height: 60px; }
+            h1 { font-size: 36px; } .slide-title h1 { font-size: 40px; }
+            h2 { font-size: 30px; } p, .lead { font-size: 16px; } .quote-text { font-size: 24px; }
+            .cards-grid, .cards-grid.two-col { grid-template-columns: 1fr; gap: 16px; }
+            .card { padding: 24px; } .two-column { grid-template-columns: 1fr; gap: 32px; }
+            .feature-list { margin-top: 32px; }
+            .equation { flex-direction: column; gap: 12px; } .equation-part { padding: 16px 24px; font-size: 14px; }
+            .roadmap-steps { grid-template-columns: 1fr; }
+            .nav-controls { bottom: 24px; }
+        }
+        @media screen and (max-width: 480px) {
+            .slide { padding: 70px 12px 90px; justify-content: flex-start; padding-top: 80px; overflow-y: auto; }
+            .slide-content { max-width: 100%; padding: 0 4px; }
+            .slide-header { top: 8px; left: 10px; right: 10px; flex-direction: row; justify-content: space-between; }
+            .logo { height: 28px; } .module-label { font-size: 9px; letter-spacing: 1px; }
+            .section-label { font-size: 9px; letter-spacing: 1.5px; margin-bottom: 12px; }
+            h1 { font-size: 22px; margin-bottom: 16px; } .slide-title h1 { font-size: 24px; }
+            h2 { font-size: 20px; margin-bottom: 12px; } p, .lead { font-size: 13px; line-height: 1.5; }
+            .quote-text { font-size: 16px; } .quote-text::before { font-size: 48px; }
+            .card { padding: 12px; } .card h4 { font-size: 14px; margin-bottom: 6px; } .card p { font-size: 12px; line-height: 1.4; }
+            .feature-list { margin-top: 20px; } .feature-item { padding: 14px 0; gap: 12px; }
+            .feature-number { width: 26px; height: 26px; font-size: 12px; }
+            .feature-text h4 { font-size: 14px; } .feature-text p { font-size: 12px; }
+            .equation-part { padding: 12px 16px; font-size: 12px; } .equation-symbol { font-size: 18px; }
+            .two-column { gap: 20px; margin-top: 24px; } .column h4 { font-size: 14px; margin-bottom: 12px; padding-bottom: 8px; } .column li { font-size: 12px; padding: 8px 0; }
+            .roadmap-step { padding: 12px; gap: 10px; } .step-number { width: 28px; height: 28px; font-size: 13px; } .step-content h4 { font-size: 13px; } .step-content p { font-size: 11px; }
+            .callout { padding: 14px 16px; margin-top: 20px; } .callout p { font-size: 12px; }
+            .activity-meta { padding: 8px 16px; font-size: 11px; margin-top: 24px; }
+            .title-meta { margin-top: 32px; padding-top: 20px; gap: 24px; flex-wrap: wrap; justify-content: center; } .meta-item { font-size: 11px; }
+            .nav-controls { bottom: 10px; gap: 16px; } .nav-btn { width: 36px; height: 36px; } .nav-btn svg { width: 16px; height: 16px; } .slide-counter { font-size: 11px; }
+            .ell-mark { font-size: 11px; bottom: 24px; right: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active" data-slide="1">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);">
+                <span class="module-label">Executive Leadership Lab</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Module 9 &mdash; September</span>
+                <h1>Executive Storytelling:<br>Master Your Narrative</h1>
+                <p class="lead">Your work does not speak for itself. The story you tell about it is what travels into the rooms where you're discussed.</p>
+                <div class="title-meta">
+                    <span class="meta-item">Lane: Value &middot; Communicate Impact</span>
+                    <span class="meta-item">Coaching Women of Color</span>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 2: Why this module -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Why This Module</span>
+                <h2>A Win No One Hears About Doesn't Travel</h2>
+                <p class="lead">You've done the work. But the version of your work that reaches a promotion committee, an interviewer, or your team is the version you can put into words.</p>
+                <div class="callout"><p>Coming back from the summer, this module turns your wins into narrative: the technique of telling them so they land and stay.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 3: What you'll gain -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">What You'll Gain</span>
+                <h2>Four Things You'll Walk Away With</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Three story structures</h4><p>STAR, CAR, and CARL: simple frames that turn a win into a story people remember.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>A wins-to-stories habit</h4><p>Convert the accomplishments you already have into stories you can tell.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>A 2-minute Signature Story</h4><p>Your default answer to &ldquo;tell me about yourself&rdquo; and &ldquo;walk me through your impact.&rdquo;</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Sharper delivery</h4><p>Ownership language, pacing, and presence so the story lands the way you mean it.</p></div></div>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 4: The core idea -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">The Core Idea</span>
+                <h2>From Doing the Work to Owning the Telling</h2>
+                <p class="lead">Doing great work is necessary. It is not sufficient. The people who advance learn to narrate their impact, on purpose, in their own words.</p>
+                <div class="callout"><p>Your narrative is an asset you <strong>build</strong>, not a talent you're born with. This month you build it.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 5: The key distinction (Feb vs Sep) -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">The Key Distinction</span>
+                <h2>February Chose the Rooms. September Gives You the Words.</h2>
+                <div class="equation">
+                    <div class="equation-part">February<br><span style="font-weight:400; color:var(--text-light); font-size:13px;">Strategy &middot; Who, When, Where</span></div>
+                    <div class="equation-symbol">&rarr;</div>
+                    <div class="equation-part equation-result">September<br><span style="font-weight:400; color:rgba(255,255,255,0.85); font-size:13px;">Technique &middot; How to say it</span></div>
+                </div>
+                <div class="callout"><p>February's <strong>Strategic Positioning</strong> decided <em>who</em> to reach and <em>when</em>. September is the craft: <em>how</em> to say it so the win is unmistakable.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 6: Why story works -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Why Story Works</span>
+                <h2>People Remember Stories, Not Bullet Points</h2>
+                <p class="lead">A list of accomplishments is forgotten by the elevator. A story with a stake, a move, and a result sticks, gets repeated, and carries your credibility into rooms you're not in.</p>
+                <div class="callout"><p>Structure is what does the carrying. A frame turns scattered facts into something a listener can hold, retell, and act on.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 7: Quote / reflection -->
+        <div class="slide slide-quote" data-slide="7">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <p class="quote-text">If you don't put your work into words, someone else will put it into theirs, and theirs may leave you out.</p>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 8: The structures STAR / CAR / CARL -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">The Framework</span>
+                <h2>Three Structures: STAR &middot; CAR &middot; CARL</h2>
+                <div class="cards-grid">
+                    <div class="card"><span class="card-tag">STAR</span><h4>Situation &middot; Task &middot; Action &middot; Result</h4><p>The full frame. Best for interviews and reviews where context matters.</p></div>
+                    <div class="card"><span class="card-tag">CAR</span><h4>Challenge &middot; Action &middot; Result</h4><p>The tight frame. Best when time is short and the result should land fast.</p></div>
+                    <div class="card"><span class="card-tag">CARL</span><h4>Challenge &middot; Action &middot; Result &middot; Learning</h4><p>Adds reflection. Best for growth conversations and leading teams.</p></div>
+                </div>
+                <div class="callout"><p>Same win, three frames. You choose the frame to fit the room, not the other way around.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 9: The Signature Story -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Your Anchor</span>
+                <h2>The Signature Story</h2>
+                <p class="lead">One story, about two minutes long, that captures who you are and the value you bring. It's your default answer when someone says &ldquo;tell me about yourself.&rdquo;</p>
+                <div class="callout"><p>Everything else in this module builds toward it: learn the structures, mine your wins, then shape the one story you can tell in your sleep and mean.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 10: Activity - Worksheet 1 -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Activity</span>
+                <h2>Structure a Win Three Ways</h2>
+                <p class="lead">Open the <strong>Story Structure Templates</strong> worksheet. Take one real win and run it through STAR, CAR, and CARL, and notice how the frame changes what you emphasize.</p>
+                <span class="activity-meta">Time: 12&ndash;15 minutes &middot; Worksheet: Story Structure Templates (STAR, CAR, CARL)</span>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 11: Setup - you already have the material -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Before the Next Activity</span>
+                <h2>You Already Have the Material</h2>
+                <p class="lead">You don't need a bigger career to have great stories. The wins from this year, and the reflection you did over the summer, are raw material. The work is converting them.</p>
+                <div class="callout"><p>Most people leave their best stories buried in a results bullet. Next, we dig them out.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 12: Activity - Worksheet 2 -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Activity</span>
+                <h2>Convert Your Wins into Stories</h2>
+                <p class="lead">Open the <strong>Wins-to-Stories Converter</strong>. Take three to five wins and turn each into a structured story you could tell out loud.</p>
+                <span class="activity-meta">Time: 12&ndash;15 minutes &middot; Worksheet: Wins-to-Stories Converter</span>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 13: Build a portfolio -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Deepening</span>
+                <h2>One Win, Re-Cut for the Room</h2>
+                <p class="lead">Different rooms need different stories. Build a small portfolio so you're never scrambling for the right one.</p>
+                <div class="cards-grid">
+                    <div class="card"><span class="card-tag">Interviews</span><h4>Prove the fit</h4><p>Lead with the challenge and the result that maps to what they need.</p></div>
+                    <div class="card"><span class="card-tag">Reviews</span><h4>Claim the impact</h4><p>Foreground your specific actions and the measurable outcome.</p></div>
+                    <div class="card"><span class="card-tag">Leading Teams</span><h4>Teach the lesson</h4><p>Use CARL: end on what you learned and what it means for the team.</p></div>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 14: A tool - the Signature Story shape -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">The Framework</span>
+                <h2>The Shape of a Signature Story</h2>
+                <div class="equation">
+                    <div class="equation-part">Hook</div>
+                    <div class="equation-symbol">+</div>
+                    <div class="equation-part">Stakes</div>
+                    <div class="equation-symbol">+</div>
+                    <div class="equation-part">Your Action</div>
+                    <div class="equation-symbol">+</div>
+                    <div class="equation-part">Result</div>
+                    <div class="equation-symbol">+</div>
+                    <div class="equation-part equation-result">Meaning</div>
+                </div>
+                <div class="callout"><p>The last beat is the one most people skip is <strong>Meaning</strong>: what the story says about who you are and how you lead. That's what they remember.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 15: Activity - Worksheet 3 -->
+        <div class="slide" data-slide="15">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Activity</span>
+                <h2>Craft Your Signature Story</h2>
+                <p class="lead">Open the <strong>Signature Story Worksheet</strong>. Draft your polished, 2-minute story section by section, hook to meaning.</p>
+                <span class="activity-meta">Time: 12&ndash;15 minutes &middot; Worksheet: Signature Story Worksheet</span>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 16: WOC-specific strategy -->
+        <div class="slide" data-slide="16">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Strategy</span>
+                <h2>Owning Your Narrative as a Woman of Color</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <h4>The Realities</h4>
+                        <ul>
+                            <li>Many of us are taught to deflect credit, to say &ldquo;we&rdquo; when it was you.</li>
+                            <li>Centering others can quietly erase your own role in the win.</li>
+                            <li>Minimizing (&ldquo;it was nothing&rdquo;) reads as fact, not modesty.</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>The Moves</h4>
+                        <ul>
+                            <li>Claim your actions in the first person: &ldquo;I led,&rdquo; &ldquo;I decided,&rdquo; &ldquo;I built.&rdquo;</li>
+                            <li>Credit the team <em>and</em> keep your part visible; both can be true.</li>
+                            <li>State the result plainly. Owning it authentically is not bragging.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 17: Delivery -->
+        <div class="slide" data-slide="17">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Technique</span>
+                <h2>How You Tell It Is Half of It</h2>
+                <div class="cards-grid">
+                    <div class="card"><h4>Ownership language</h4><p>&ldquo;I led,&rdquo; not &ldquo;we kind of.&rdquo; Cut the hedges that shrink your role.</p></div>
+                    <div class="card"><h4>Pacing &amp; pause</h4><p>Slow down at the result. Let the important beat land before you move on.</p></div>
+                    <div class="card"><h4>Presence</h4><p>Steady voice, eye contact, no rushing to fill silence. Conviction is heard.</p></div>
+                </div>
+                <div class="callout"><p>A strong story told apologetically loses. The delivery is what makes the win believable.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 18: Activity - Worksheet 4 -->
+        <div class="slide" data-slide="18">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Activity</span>
+                <h2>Assess Your Delivery</h2>
+                <p class="lead">Open the <strong>Delivery Self-Assessment Checklist</strong>. Score how you currently tell your story, then pick two things to sharpen before you tell it for real.</p>
+                <span class="activity-meta">Time: 8&ndash;10 minutes &middot; Worksheet: Delivery Self-Assessment Checklist</span>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 19: The 14-Day Sprint -->
+        <div class="slide" data-slide="19">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Take Action</span>
+                <h2>The 14-Day Storytelling Sprint</h2>
+                <div class="roadmap-steps">
+                    <div class="roadmap-step"><div class="step-number">1</div><div class="step-content"><h4>Say it out loud</h4><p>Tell your Signature Story to one person this week.</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">2</div><div class="step-content"><h4>Convert two more</h4><p>Add two wins to your story portfolio.</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">3</div><div class="step-content"><h4>Use one for real</h4><p>Work a story into an actual review, meeting, or intro.</p></div></div>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 20: Quote / reflection (dark) -->
+        <div class="slide slide-dark" data-slide="20">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <p class="quote-text">Claiming your story is not bragging. It's making sure the truth of your work is one of the things people know.</p>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 21: Key takeaways -->
+        <div class="slide" data-slide="21">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Key Takeaways</span>
+                <h2>What to Remember</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>The story is the asset</h4><p>Great work still needs to be told to travel.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Structure carries the win</h4><p>STAR, CAR, CARL: pick the frame to fit the room.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>You already have the material</h4><p>Convert the wins you have; don't wait for bigger ones.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>One Signature Story, many cuts</h4><p>Anchor with one, then re-cut for each audience.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">5</div><div class="feature-text"><h4>Delivery makes it believable</h4><p>Own your actions, slow down at the result, drop the hedges.</p></div></div>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 22: Homework & close (dark) -->
+        <div class="slide slide-dark" data-slide="22">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/logo.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);">
+                <span class="module-label">Module 9 &mdash; September</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Your Homework</span>
+                <h2>Tell the Story Only You Can Tell.</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Complete all four worksheets</h4><p>Structure Templates, Wins-to-Stories, Signature Story, Delivery Self-Assessment.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Finish your Signature Story</h4><p>A polished 2-minute story, ready to tell.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Build 3&ndash;5 context stories</h4><p>Ready for interviews, reviews, and leading teams.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Share one story</h4><p>Post it in the community for feedback and accountability.</p></div></div>
+                </div>
+                <div class="callout" style="margin-top:32px;"><p><strong>Builds into October (Inclusive Leadership):</strong> a strong narrative is the foundation for leading others. October turns your voice outward, using storytelling to build coalition and lead inclusively.</p></div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+    </div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" id="prev" onclick="navigate(-1)" disabled aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <span class="slide-counter" id="counter">1 / 22</span>
+        <button class="nav-btn" id="next" onclick="navigate(1)" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        let current = 0;
+
+        function navigate(dir) {
+            slides[current].classList.remove('active');
+            current = Math.max(0, Math.min(total - 1, current + dir));
+            slides[current].classList.add('active');
+            document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+            document.getElementById('prev').disabled = current === 0;
+            document.getElementById('next').disabled = current === total - 1;
+            document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+            if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+        });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+        });
+
+        document.getElementById('progress').style.width = (1 / total * 100) + '%';
+    </script>
+</body>
+</html>
